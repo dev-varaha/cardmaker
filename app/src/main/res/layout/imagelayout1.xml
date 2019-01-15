@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/size110dp"
+    android:layout_height="@dimen/size110dp"
+    android:layout_margin="@dimen/size1sp"
+    android:background="@color/colorblacktrans"
+    android:padding="@dimen/size10dp"
+    android:gravity="center_horizontal">
+
+    <tangxiaolv.com.library.EffectiveShapeView
+        android:id="@+id/iv"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background" />
+
+</LinearLayout>

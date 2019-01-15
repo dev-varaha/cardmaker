@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">CardMaker2</string>
+    <string name="settings">Settings</string>
+    <string name="text">Text</string>
+    <string name="bg_layer1">Bg layer1</string>
+    <string name="bg_layer2">Bg layer2</string>
+    <string name="material">Material</string>
+    <string name="symbol">Symbols</string>
+    <string name="image">Image</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shape">Shape</string>
+    <string name="line">Line</string>
+    <string name="arc">Arc</string>
+    <string name="rect">Rectangle</string>
+    <string name="pentagon">Pentagonal</string>
+    <string name="diagonal_rect">Diagonal</string>
+    <string name="ring">Ring</string>
+    <string name="trangle">Trangle</string>
+    <string name="width">width</string>
+    <string name="height">height</string>
+    <string name="rotate">rotate</string>
+    <string name="brigthness">Britness</string>
+    <string name="choosefromgalery">Choose from galery</string>
+    <string name="layeronedialodtext">Choose one of them</string>
+    <string name="enter_text">Enter Text</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="addborder">Add Border</string>
+    <string name="bordercolor">Border Color</string>
+</resources>
