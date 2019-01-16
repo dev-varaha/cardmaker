@@ -189,4 +189,9 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    public void ImageResize(int size) {
+
+    }
+
 }

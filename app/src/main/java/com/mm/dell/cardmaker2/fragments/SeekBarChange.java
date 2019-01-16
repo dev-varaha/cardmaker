@@ -21,4 +21,6 @@ public interface SeekBarChange {
     void getBitmapFromGallery(Bitmap bitmap);
 
     void setShapeImageView(int color, int side, int borderwidth, int shapeType);
+
+    void ImageResize(int size);
 }

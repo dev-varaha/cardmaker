@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -12,7 +11,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -26,9 +24,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.util.Xml;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,33 +42,24 @@ import android.widget.Toast;
 import com.mm.dell.cardmaker2.Dialogs.ColorPickerDialog;
 import com.mm.dell.cardmaker2.Dialogs.GalleryDialog;
 import com.mm.dell.cardmaker2.Dialogs.HeightDialog;
+import com.mm.dell.cardmaker2.Dialogs.HeightWidthDialog;
 import com.mm.dell.cardmaker2.Dialogs.OpacityDialog;
 import com.mm.dell.cardmaker2.Dialogs.RotateDialog;
 import com.mm.dell.cardmaker2.Dialogs.ShapedImageViewDialog;
 import com.mm.dell.cardmaker2.Dialogs.TextViewSizeDialog;
 import com.mm.dell.cardmaker2.Dialogs.WidthDialog;
-import com.mm.dell.cardmaker2.Utils.Utils;
 import com.mm.dell.cardmaker2.fragments.MainFragment;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
-import com.sutanu.multiiconview.MultiColorIconView;
 
-
-import org.xmlpull.v1.XmlPullParser;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import tangxiaolv.com.library.EffectiveShapeView;
 
-import static com.mm.dell.cardmaker2.Constants.DEFAULT_BORDER_SIZE;
 import static com.mm.dell.cardmaker2.Constants.LAYERTWO_BITMAP_CODE;
 import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_BORDER_SIZE;
 import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
 import static com.mm.dell.cardmaker2.Constants.REQUEST_CODE;
-import static com.mm.dell.cardmaker2.Constants.UNDEFINE_SHAPE_TYPE;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, RecyclerOnItemClickListner, SeekBarChange, TouchedViewFind, View.OnTouchListener {
 
@@ -90,6 +77,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     ImageView iv_opacity;
     ImageView iv_textsize;
     ImageView iv_deleteview;
+    ImageView iv_height_width;
+
 
     /**
      * Util Dialog those provide us multiple functionality
@@ -100,6 +89,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     OpacityDialog opacityDialog;
     ColorPickerDialog colorPickerDialog;
     TextViewSizeDialog textViewSizeDialog;
+    HeightWidthDialog heightWidthDialog;
 
     private int _xDelta;
     private int _yDelta;
@@ -205,12 +195,12 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         assetManager = getAssets();
         setLeftDrawer();
         setRightDrawer();
+
         initdailogs();
         ll_util.post(() -> {
             width = ll_util.getWidth();
             height = ll_util.getHeight();
         });
-
 
     }
 
@@ -221,6 +211,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         opacityDialog = new OpacityDialog(Main2Activity.this, this);
         colorPickerDialog = new ColorPickerDialog(Main2Activity.this, this);
         textViewSizeDialog = new TextViewSizeDialog(Main2Activity.this, this);
+        heightWidthDialog = new HeightWidthDialog(Main2Activity.this, this);
 
     }
 
@@ -268,7 +259,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         iv_gradiantspicker = findViewById(R.id.iv_gradiantspicker);
         iv_gellary = findViewById(R.id.iv_gellary);
         iv_deleteview = findViewById(R.id.iv_deleteview);
+        iv_height_width = findViewById(R.id.iv_height_width);
+        iv_height_width.setOnClickListener(this);
         iv_deleteview.setOnClickListener(this);
+
         iv_rotate.setOnClickListener(this);
         iv_width.setOnClickListener(this);
         iv_height.setOnClickListener(this);
@@ -558,6 +552,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             case R.id.iv_deleteview:
                 deleteView();
                 break;
+
+            case R.id.iv_height_width:
+                heightWidthDialog.show();
+                heightWidthDialog.setMax_Progress(height, 40);
+                break;
         }
     }
 
@@ -573,7 +572,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
-            //bg layer one
+            /**
+             * bg layer one*/
             case 0:
 //                setDialodlayerOne();
                 WorkOnLayerOne = 1;
@@ -586,7 +586,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
                 HideNavigationLeft();
                 break;
-            // bg layer two
+            /**
+             *bg layer two
+             */
             case 1:
                 //startActivityForResult(new Intent(Main2Activity.this, LayerTwoActivity.class), REQUEST_CODE);
                 WorkOnLayerOne = 0;
@@ -603,7 +605,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
                 HideNavigationLeft();
                 break;
-            // image
+            /**
+             * image*/
             case 2:
                 WorkOnLayerOne = 0;
                 WorkOnLayerTwo = 0;
@@ -615,7 +618,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 shapedImageViewDialog.show();
                 HideNavigationLeft();
                 break;
-            // text
+            /**
+             * text*/
             case 3:
                 try {
 
@@ -634,7 +638,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
 
                 break;
-            // material
+            /**
+             *  material*/
             case 4:
                 WorkOnLayerThree = 0;
                 WorkOnLayerTwo = 0;
@@ -649,7 +654,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
                 HideNavigationLeft();
                 break;
-            // symbols
+            /**
+             * symbols*/
             case 5:
                 WorkOnLayerThree = 0;
                 WorkOnLayerTwo = 0;
@@ -1066,6 +1072,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                     } catch (Exception e) {
                     }
                 });
+            } else if (view instanceof EffectiveShapeView) {
+                view.post(() -> {
+                    EffectiveShapeView shapeView = (EffectiveShapeView) view;
+                   // shapeView.setImageDrawable(R.drawable);
+                });
             }
         }
 
@@ -1073,7 +1084,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void getBitmapFromGallery(Bitmap bitmap) {
-
+        if (view!=null){
+            Log.e("getBitmapFromGallery","getBitmapFromGallery is called");
+            EffectiveShapeView shapeView = (EffectiveShapeView) view;
+            shapeView.setImageBitmap(bitmap);
+        }
     }
 
     @Override
@@ -1094,6 +1109,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                             if (borderwidth != NOTDEFINE_BORDER_SIZE) {
                                 shape.setBorderColor(color);
                                 shape.setBorderWidth(borderwidth);
+
                             }
                         } else {
                             shape.changeShapeType(shapeType, side);
@@ -1107,6 +1123,29 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 });
             }
         } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void ImageResize(int size) {
+        if (view != null && (WorkOnLayerFive == 1 || WorkOnLayerSix == 1 || WorkOnLayerThree == 1)) {
+            view.post(() -> {
+                if (view instanceof EffectiveShapeView) {
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                    params.height = 400;
+                    params.width = 400;
+                    EffectiveShapeView shapeview = (EffectiveShapeView) view;
+                    shapeview.setLayoutParams(params);
+                    shapeview.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+                    shapeview.invalidate();
+
+                } else {
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                    params.height = size;
+                    params.width = size;
+                    view.setLayoutParams(params);
+                }
+            });
         }
     }
 

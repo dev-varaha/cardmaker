@@ -17,7 +17,7 @@ public class HeightWidthDialog extends Dialog implements View.OnClickListener, S
     SeekBar seekBar;
     SeekBarChange seekBarChange;
 
-    public TextViewSizeDialog(Context context, SeekBarChange seekBarChange) {
+    public HeightWidthDialog(Context context, SeekBarChange seekBarChange) {
         super(context);
         this.seekBarChange = seekBarChange;
     }
@@ -38,7 +38,6 @@ public class HeightWidthDialog extends Dialog implements View.OnClickListener, S
         seekBar.setOnSeekBarChangeListener(this);
         tv_cancel.setOnClickListener(this);
         tv_ok.setOnClickListener(this);
-        setMax_Progress(100, 1);
     }
 
     @Override
@@ -55,7 +54,7 @@ public class HeightWidthDialog extends Dialog implements View.OnClickListener, S
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        seekBarChange.OnTextSizeChange(progress);
+        seekBarChange.ImageResize(progress);
     }
 
     @Override
