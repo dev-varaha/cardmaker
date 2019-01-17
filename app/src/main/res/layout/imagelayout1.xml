@@ -7,7 +7,7 @@
     android:padding="@dimen/size10dp"
     android:gravity="center_horizontal">
 
-    <tangxiaolv.com.library.EffectiveShapeView
+    <com.mm.dell.cardmaker2.layout.EffectiveShapeView
         android:id="@+id/iv"
         android:layout_gravity="center"
         android:scaleType="centerCrop"

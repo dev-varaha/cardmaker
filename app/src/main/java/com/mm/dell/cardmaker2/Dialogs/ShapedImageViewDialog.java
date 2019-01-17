@@ -18,8 +18,7 @@ import android.widget.TextView;
 
 import com.mm.dell.cardmaker2.R;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
-
-import tangxiaolv.com.library.EffectiveShapeView;
+import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
 
 import static com.mm.dell.cardmaker2.Constants.DEFAULT_BORDER_COLOR;
 import static com.mm.dell.cardmaker2.Constants.DEFAULT_BORDER_SIZE;

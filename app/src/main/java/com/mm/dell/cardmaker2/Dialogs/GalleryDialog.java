@@ -84,6 +84,7 @@ public class GalleryDialog extends Dialog implements View.OnClickListener {
         public PhotosAdapter(Context context, ArrayList<String> arrayList) {
             this.context = context;
             this.arrayList = arrayList;
+
         }
 
         @NonNull
@@ -97,9 +98,14 @@ public class GalleryDialog extends Dialog implements View.OnClickListener {
         public void onBindViewHolder(@NonNull ImageHolder imageHolder, int i) {
             try {
                 Log.e("onBindViewHolder", "onBindViewHolder   >>  " + arrayList.get(i));
+
                 Bitmap bitmap = BitmapFactory.decodeFile(arrayList.get(i));
                 imageHolder.imageView.setImageBitmap(bitmap);
-                seekBarChange.getBitmapFromGallery(bitmap);
+                imageHolder.imageView.setOnClickListener(v -> {
+                    seekBarChange.getBitmapFromGallery(bitmap);
+                });
+
+
             } catch (Exception e) {
             }
 

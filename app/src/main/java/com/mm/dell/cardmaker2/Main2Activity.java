@@ -5,7 +5,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -50,11 +55,10 @@ import com.mm.dell.cardmaker2.Dialogs.TextViewSizeDialog;
 import com.mm.dell.cardmaker2.Dialogs.WidthDialog;
 import com.mm.dell.cardmaker2.fragments.MainFragment;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
+import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import tangxiaolv.com.library.EffectiveShapeView;
 
 import static com.mm.dell.cardmaker2.Constants.LAYERTWO_BITMAP_CODE;
 import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_BORDER_SIZE;
@@ -174,7 +178,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     ViewGroup.LayoutParams params_symbols = new ViewGroup.LayoutParams(40, 40);
     ViewGroup.LayoutParams params_material = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    ViewGroup.LayoutParams params_shapimage = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    ViewGroup.LayoutParams params_shapimage = new ViewGroup.LayoutParams(90, 90);
 
 
     /**
@@ -328,6 +332,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         iv_pic3.setOnTouchListener(this);
         iv_pic4.setOnTouchListener(this);
         iv_pic5.setOnTouchListener(this);
+        iv_pic1.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic2.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic3.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic4.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic5.setScaleType(ImageView.ScaleType.FIT_XY);
         iv_pic1.setImageResource(R.drawable.background);
         iv_pic2.setImageResource(R.drawable.background);
         iv_pic3.setImageResource(R.drawable.background);
@@ -1075,7 +1084,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             } else if (view instanceof EffectiveShapeView) {
                 view.post(() -> {
                     EffectiveShapeView shapeView = (EffectiveShapeView) view;
-                   // shapeView.setImageDrawable(R.drawable);
+                    // shapeView.setImageDrawable(R.drawable);
                 });
             }
         }
@@ -1084,10 +1093,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void getBitmapFromGallery(Bitmap bitmap) {
-        if (view!=null){
-            Log.e("getBitmapFromGallery","getBitmapFromGallery is called");
+        if (view != null) {
+            Log.e("getBitmapFromGallery", "getBitmapFromGallery is called");
             EffectiveShapeView shapeView = (EffectiveShapeView) view;
-            shapeView.setImageBitmap(bitmap);
+            shapeView.setImageBitmap(getRoundedCornerBitmap(bitmap, 0));
         }
     }
 
@@ -1132,11 +1141,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             view.post(() -> {
                 if (view instanceof EffectiveShapeView) {
                     RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
-                    params.height = 400;
-                    params.width = 400;
+                    params.height = size;
+                    params.width = size;
                     EffectiveShapeView shapeview = (EffectiveShapeView) view;
+                    Bitmap bitmap = ((BitmapDrawable) shapeview.getDrawable()).getBitmap();
+                    shapeview.setScaleType(ImageView.ScaleType.FIT_XY);
+                    shapeview.setImageBitmap(bitmap);
                     shapeview.setLayoutParams(params);
-                    shapeview.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
                     shapeview.invalidate();
 
                 } else {
@@ -1196,6 +1207,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
+
     public void saveBitmap() {
         try {
             card_main.setDrawingCacheEnabled(true);
@@ -1207,6 +1219,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
     }
+
 
     class SaveBitmap extends AsyncTask {
 
@@ -1256,4 +1269,27 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(Main2Activity.this, "" + status, Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    public Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
+    }
+
 }

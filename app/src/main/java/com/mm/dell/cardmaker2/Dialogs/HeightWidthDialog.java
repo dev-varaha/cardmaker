@@ -47,6 +47,7 @@ public class HeightWidthDialog extends Dialog implements View.OnClickListener, S
                 this.dismiss();
                 break;
             case R.id.tv_ok:
+
                 this.dismiss();
                 break;
         }
