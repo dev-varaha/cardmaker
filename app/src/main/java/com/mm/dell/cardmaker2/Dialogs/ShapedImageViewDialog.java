@@ -34,9 +34,10 @@ public class ShapedImageViewDialog extends Dialog implements View.OnClickListene
     RecyclerView recyclerView;
     LinearLayout ll_colorpicker;
     CheckBox checkBox;
+    private int shapeType;
     private int bordercolor = DEFAULT_BORDER_COLOR;
     private int side = NOTDEFINE_SIDE;
-    private int shapeType = UNDEFINE_SHAPE_TYPE;
+    private int lshapeType = UNDEFINE_SHAPE_TYPE;
 
     public ShapedImageViewDialog(Context context, SeekBarChange seekBarChange) {
         super(context);
@@ -97,6 +98,7 @@ public class ShapedImageViewDialog extends Dialog implements View.OnClickListene
 
     class ShapeImageAdapter extends RecyclerView.Adapter<ShapeImageAdapter.ImageHolder> {
         Context context;
+
 
         public ShapeImageAdapter(Context context) {
             this.context = context;

@@ -30,6 +30,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -175,10 +176,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private View view;
     public static int width = 0;
     public static int height = 0;
-    ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    ViewGroup.LayoutParams params_symbols = new ViewGroup.LayoutParams(40, 40);
-    ViewGroup.LayoutParams params_material = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-    ViewGroup.LayoutParams params_shapimage = new ViewGroup.LayoutParams(90, 90);
+    ViewGroup.LayoutParams params;
+    ViewGroup.LayoutParams params_symbols;
+    ViewGroup.LayoutParams params_material;
+    ViewGroup.LayoutParams params_shapimage;
 
 
     /**
@@ -196,16 +197,28 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         initView();
+        initparam();
         assetManager = getAssets();
         setLeftDrawer();
         setRightDrawer();
-
         initdailogs();
         ll_util.post(() -> {
             width = ll_util.getWidth();
             height = ll_util.getHeight();
         });
 
+    }
+
+    private void initparam() {
+
+        params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params_symbols = new ViewGroup.LayoutParams(40, 40);
+        params_material = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params_shapimage = new ViewGroup.LayoutParams(90, 90);
+        AddTextViews();
+        AddSymbolsViews();
+        AddMaterialsView();
+        AddImages();
     }
 
     private void initdailogs() {
@@ -276,11 +289,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         iv_gradiantspicker.setOnClickListener(this);
         iv_gellary.setOnClickListener(this);
 
-
-        AddTextViews();
-        AddSymbolsViews();
-        AddMaterialsView();
-        AddImages();
     }
 
     private void AddMaterialsView() {
@@ -451,7 +459,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         tv8.setLayoutParams(params);
         tv9.setLayoutParams(params);
         tv10.setLayoutParams(params);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv1, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+
+       /* TextViewCompat.setAutoSizeTextTypeWithDefaults(tv1, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv2, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv3, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv4, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
@@ -461,6 +470,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv8, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv9, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
         TextViewCompat.setAutoSizeTextTypeWithDefaults(tv10, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+      */
         tv1.setOnTouchListener(this);
         tv2.setOnTouchListener(this);
         tv3.setOnTouchListener(this);
@@ -690,18 +700,23 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
         if (iv_m1.getVisibility() == View.GONE) {
             iv_m1.setVisibility(View.VISIBLE);
+            iv_m1.bringToFront();
             view = iv_m1;
         } else if (iv_m2.getVisibility() == View.GONE) {
             iv_m2.setVisibility(View.VISIBLE);
+            iv_m1.bringToFront();
             view = iv_m2;
         } else if (iv_m3.getVisibility() == View.GONE) {
             iv_m3.setVisibility(View.VISIBLE);
+            iv_m1.bringToFront();
             view = iv_m3;
         } else if (iv_m4.getVisibility() == View.GONE) {
             iv_m4.setVisibility(View.VISIBLE);
+            iv_m1.bringToFront();
             view = iv_m4;
         } else if (iv_m5.getVisibility() == View.GONE) {
             iv_m5.setVisibility(View.VISIBLE);
+            iv_m1.bringToFront();
             view = iv_m5;
         }
 
@@ -714,32 +729,44 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         if (iv_s1.getVisibility() == View.GONE) {
             iv_s1.setVisibility(View.VISIBLE);
             view = iv_s1;
+            view.bringToFront();
         } else if (iv_s2.getVisibility() == View.GONE) {
             iv_s2.setVisibility(View.VISIBLE);
             view = iv_s2;
+            view.bringToFront();
+
         } else if (iv_s3.getVisibility() == View.GONE) {
             iv_s3.setVisibility(View.VISIBLE);
             view = iv_s3;
+            view.bringToFront();
+
         } else if (iv_s4.getVisibility() == View.GONE) {
             iv_s4.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s4;
         } else if (iv_s5.getVisibility() == View.GONE) {
             iv_s5.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s5;
         } else if (iv_s6.getVisibility() == View.GONE) {
             iv_s6.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s6;
         } else if (iv_s7.getVisibility() == View.GONE) {
             iv_s7.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s7;
         } else if (iv_s8.getVisibility() == View.GONE) {
             iv_s8.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s8;
         } else if (iv_s9.getVisibility() == View.GONE) {
             iv_s9.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s9;
         } else if (iv_s10.getVisibility() == View.GONE) {
             iv_s10.setVisibility(View.VISIBLE);
+            view.bringToFront();
             view = iv_s10;
         }
 
@@ -750,18 +777,28 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
         if (iv_pic1.getVisibility() == View.GONE) {
             iv_pic1.setVisibility(View.VISIBLE);
+            view = iv_pic1;
+            view.bringToFront();
             return iv_pic1;
         } else if (iv_pic2.getVisibility() == View.GONE) {
             iv_pic2.setVisibility(View.VISIBLE);
+            view = iv_pic2;
+            view.bringToFront();
             return iv_pic2;
         } else if (iv_pic3.getVisibility() == View.GONE) {
             iv_pic3.setVisibility(View.VISIBLE);
+            view = iv_pic3;
+            view.bringToFront();
             return iv_pic3;
         } else if (iv_pic4.getVisibility() == View.GONE) {
             iv_pic4.setVisibility(View.VISIBLE);
+            view = iv_pic4;
+            view.bringToFront();
             return iv_pic4;
         } else if (iv_pic5.getVisibility() == View.GONE) {
             iv_pic5.setVisibility(View.VISIBLE);
+            view = iv_pic5;
+            view.bringToFront();
             return iv_pic5;
         } else {
             return null;
@@ -782,33 +819,43 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
         if (tv1.getText().toString().isEmpty()) {
             EditTextViewDialog(tv1);
+            view.bringToFront();
             view = tv1;
         } else if (tv2.getText().toString().isEmpty()) {
             view = tv2;
+            view.bringToFront();
             EditTextViewDialog(tv2);
         } else if (tv3.getText().toString().isEmpty()) {
             view = tv3;
+            view.bringToFront();
             EditTextViewDialog(tv3);
         } else if (tv4.getText().toString().isEmpty()) {
             view = tv4;
+            view.bringToFront();
             EditTextViewDialog(tv4);
         } else if (tv5.getText().toString().isEmpty()) {
             view = tv5;
+            view.bringToFront();
             EditTextViewDialog(tv5);
         } else if (tv6.getText().toString().isEmpty()) {
             view = tv6;
+            view.bringToFront();
             EditTextViewDialog(tv6);
         } else if (tv7.getText().toString().isEmpty()) {
             EditTextViewDialog(tv7);
+            view.bringToFront();
             view = tv7;
         } else if (tv8.getText().toString().isEmpty()) {
             EditTextViewDialog(tv8);
+            view.bringToFront();
             view = tv8;
         } else if (tv9.getText().toString().isEmpty()) {
             EditTextViewDialog(tv9);
+            view.bringToFront();
             view = tv9;
         } else if (tv10.getText().toString().isEmpty()) {
             EditTextViewDialog(tv10);
+            view.bringToFront();
             view = tv10;
         }
 
@@ -1007,6 +1054,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void OnHeigth(int h) {
+        Log.d("OnHeigth", "   >     " + h);
+
         try {
             if (view != null) {
                 if (!(view instanceof TextView)) {
@@ -1024,11 +1073,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void OnTextSizeChange(int ts) {
+        Log.d("OnTextSizeChange", "   >     " + ts);
         try {
             if (view instanceof TextView) {
                 view.post(() -> {
                     TextView tv = (TextView) view;
-                    tv.setTextSize(ts);
+                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, ts);
+                    tv.invalidate();
                 });
             }
         } catch (Exception e) {
@@ -1038,6 +1089,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void OnBrigthness(float b) {
+        Log.d("OnBrigthness", "   >     " + b);
+
         if (WorkOnLayerOne == 1) {
 
         } else {
@@ -1093,6 +1146,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void getBitmapFromGallery(Bitmap bitmap) {
+        Log.e("getBitmapFromGallery", "getBitmapFromGallery is called");
         if (view != null) {
             Log.e("getBitmapFromGallery", "getBitmapFromGallery is called");
             EffectiveShapeView shapeView = (EffectiveShapeView) view;
@@ -1137,6 +1191,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void ImageResize(int size) {
+        Log.e("ImageResize", "ImageResize is called");
+
         if (view != null && (WorkOnLayerFive == 1 || WorkOnLayerSix == 1 || WorkOnLayerThree == 1)) {
             view.post(() -> {
                 if (view instanceof EffectiveShapeView) {
