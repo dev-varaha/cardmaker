@@ -23,7 +23,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -45,6 +44,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mm.dell.cardmaker2.Adapters.BackGroundAdapter;
+import com.mm.dell.cardmaker2.Adapters.ComponetAdapater;
 import com.mm.dell.cardmaker2.Dialogs.ColorPickerDialog;
 import com.mm.dell.cardmaker2.Dialogs.GalleryDialog;
 import com.mm.dell.cardmaker2.Dialogs.HeightDialog;
@@ -105,7 +106,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     ImageView iv_menu1;
     ImageView iv_menu2;
     RecyclerView recyclerView;
-    NavListAdapater adapater;
+    ComponetAdapater adapater;
     Bitmap layertwo;
     ImageView iv_nav2_back;
     ImageView iv_download;
@@ -502,7 +503,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         listnav1.add(new Nev1_Item(getResources().getString(R.string.text), R.drawable.ic_text));
         listnav1.add(new Nev1_Item(getResources().getString(R.string.material), R.drawable.ic_material));
         listnav1.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
-        adapater = new NavListAdapater(Main2Activity.this, listnav1);
+        adapater = new ComponetAdapater(Main2Activity.this, listnav1);
         listViewnav1.setAdapter(adapater);
     }
 
@@ -885,7 +886,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
     private void addListToLayerOne() throws IOException {
         backgroundLists.clear();
-        LayerOneBottomAdapter adapter = new LayerOneBottomAdapter(backgroundLists, this, this);
+        BackGroundAdapter adapter = new BackGroundAdapter(backgroundLists, this, this);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -904,7 +905,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     private void addListToLayerSix() throws IOException {
 
         symbolsLists.clear();
-        LayerOneBottomAdapter adapter = new LayerOneBottomAdapter(symbolsLists, this, this);
+        BackGroundAdapter adapter = new BackGroundAdapter(symbolsLists, this, this);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);

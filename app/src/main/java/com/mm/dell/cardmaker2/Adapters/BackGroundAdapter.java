@@ -1,4 +1,4 @@
-package com.mm.dell.cardmaker2;
+package com.mm.dell.cardmaker2.Adapters;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -14,17 +14,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mm.dell.cardmaker2.R;
+import com.mm.dell.cardmaker2.RecyclerOnItemClickListner;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class LayerOneBottomAdapter extends RecyclerView.Adapter<LayerOneBottomAdapter.MyHolder> {
+public class BackGroundAdapter extends RecyclerView.Adapter<BackGroundAdapter.MyHolder> {
     Context context;
     ArrayList<String> backgroundlist = new ArrayList<>();
     RecyclerOnItemClickListner listner;
     AssetManager manager;
 
-    public LayerOneBottomAdapter(ArrayList<String> backgroundlist, Context context, RecyclerOnItemClickListner listner) {
+    public BackGroundAdapter(ArrayList<String> backgroundlist, Context context, RecyclerOnItemClickListner listner) {
         this.context = context;
         this.backgroundlist = backgroundlist;
         this.listner = listner;

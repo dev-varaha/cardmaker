@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.mm.dell.cardmaker2.Adapters.ComponetAdapater;
 import com.mm.dell.cardmaker2.fragments.MainFragment;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 
@@ -32,7 +33,7 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
     ImageView iv_menu1;
     ImageView iv_menu2;
     RecyclerView recyclerView;
-    NavListAdapater adapater;
+    ComponetAdapater adapater;
     Bitmap layertwo;
 
 
@@ -79,7 +80,7 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
         listnav1.add(new Nev1_Item(getResources().getString(R.string.rect), R.drawable.ic_rect_oval_corner));
         listnav1.add(new Nev1_Item(getResources().getString(R.string.trangle), R.drawable.ic_trangle));
 
-        adapater = new NavListAdapater(LayerTwoActivity.this, listnav1);
+        adapater = new ComponetAdapater(LayerTwoActivity.this, listnav1);
         listViewnav1.setAdapter(adapater);
     }
 

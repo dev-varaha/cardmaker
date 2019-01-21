@@ -5,7 +5,9 @@ import android.graphics.Typeface;
 import android.provider.FontsContract;
 import android.view.View;
 
-public interface RecyclerOnItemClickListner {
+import java.io.Serializable;
+
+public interface RecyclerOnItemClickListner  {
 
     void OnItemClickLister( int position, Typeface typeface);
 

@@ -1,4 +1,4 @@
-package com.mm.dell.cardmaker2;
+package com.mm.dell.cardmaker2.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,14 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mm.dell.cardmaker2.Nev1_Item;
+import com.mm.dell.cardmaker2.R;
+
 import java.util.ArrayList;
 
-public class NavListAdapater extends BaseAdapter {
+public class ComponetAdapater extends BaseAdapter {
     Context context;
     ArrayList<Nev1_Item> list = new ArrayList<>();
     LayoutInflater inflater;
 
-    public NavListAdapater(Context context, ArrayList<Nev1_Item> list) {
+    public ComponetAdapater(Context context, ArrayList<Nev1_Item> list) {
         this.context = context;
         this.list = list;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

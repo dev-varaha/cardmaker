@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.TextFragmentFragment">
+
+    <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10dp"
+        android:layout_margin="@dimen/size3dp"
+        android:progressDrawable="@drawable/seekbar_styl"
+        android:thumb="@drawable/custom_thumb" />
+
+    <HorizontalScrollView
+        android:id="@+id/scrollutil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorclan">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/size5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_textsized"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_textsize" />
+
+
+            <ImageView
+                android:id="@+id/iv_rotate"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_rotate" />
+
+
+            <ImageView
+                android:id="@+id/iv_opacity"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_brightness" />
+
+            <ImageView
+                android:id="@+id/iv_colorpicker"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/colorpicker" />
+
+
+            <ImageView
+                android:id="@+id/iv_edittext"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_edit" />
+
+            <ImageView
+                android:id="@+id/iv_deleteview"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_deleteview" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

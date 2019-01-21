@@ -29,4 +29,6 @@
     <string name="cancel">Cancel</string>
     <string name="addborder">Add Border</string>
     <string name="bordercolor">Border Color</string>
+    <string name="gallery">Gallery</string>
+
 </resources>
