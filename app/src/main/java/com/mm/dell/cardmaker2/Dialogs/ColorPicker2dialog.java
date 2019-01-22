@@ -63,7 +63,7 @@ public class ColorPicker2dialog extends Dialog implements View.OnClickListener, 
         iv_preview.setBackgroundColor(i2);
     }
 
-    interface colorpickercallback {
+   public interface colorpickercallback {
         void getColor(int i, int i1, int i2);
     }
 }

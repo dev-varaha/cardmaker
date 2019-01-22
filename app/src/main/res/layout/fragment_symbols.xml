@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.TextFragmentFragment">
+    android:orientation="vertical">
 
     <SeekBar
         android:id="@+id/seek"
@@ -27,13 +26,13 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/iv_textsized"
+                android:id="@+id/iv_size"
                 android:layout_width="@dimen/size30dp"
                 android:layout_height="@dimen/size30dp"
                 android:layout_margin="@dimen/size1dp"
                 android:background="@drawable/rounded_background"
                 android:padding="@dimen/size5dp"
-                android:src="@drawable/ic_textsize" />
+                android:src="@drawable/ic_height_width" />
 
 
             <ImageView
@@ -65,15 +64,6 @@
                 android:padding="@dimen/size5dp"
                 android:src="@drawable/colorpicker" />
 
-
-            <ImageView
-                android:id="@+id/iv_edittext"
-                android:layout_width="@dimen/size30dp"
-                android:layout_height="@dimen/size30dp"
-                android:layout_margin="@dimen/size1dp"
-                android:background="@drawable/rounded_background"
-                android:padding="@dimen/size5dp"
-                android:src="@drawable/ic_edit" />
 
             <ImageView
                 android:id="@+id/iv_deleteview"

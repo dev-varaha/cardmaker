@@ -1,8 +1,5 @@
 package com.mm.dell.cardmaker2;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -11,63 +8,33 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.mm.dell.cardmaker2.Adapters.BackGroundAdapter;
 import com.mm.dell.cardmaker2.Adapters.ComponetAdapater;
 import com.mm.dell.cardmaker2.Dialogs.ColorPickerDialog;
-import com.mm.dell.cardmaker2.Dialogs.GalleryDialog;
 import com.mm.dell.cardmaker2.Dialogs.HeightDialog;
 import com.mm.dell.cardmaker2.Dialogs.HeightWidthDialog;
 import com.mm.dell.cardmaker2.Dialogs.OpacityDialog;
 import com.mm.dell.cardmaker2.Dialogs.RotateDialog;
-import com.mm.dell.cardmaker2.Dialogs.ShapedImageViewDialog;
 import com.mm.dell.cardmaker2.Dialogs.TextViewSizeDialog;
 import com.mm.dell.cardmaker2.Dialogs.WidthDialog;
-import com.mm.dell.cardmaker2.fragments.MainFragment;
-import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.mm.dell.cardmaker2.Constants.LAYERTWO_BITMAP_CODE;
-import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_BORDER_SIZE;
-import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
-import static com.mm.dell.cardmaker2.Constants.REQUEST_CODE;
-
-public class Main2Activity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, RecyclerOnItemClickListner, SeekBarChange, TouchedViewFind, View.OnTouchListener {
+public class Main2Activity extends AppCompatActivity {
 
     /**
      * Util Imageview those provide us multiple functionality
@@ -123,45 +90,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     ArrayList<String> symbolsLists = new ArrayList<String>();
 
 
-    /**
-     * textview
-     */
-    TextView tv1;
-    TextView tv2;
-    TextView tv3;
-    TextView tv4;
-    TextView tv5;
-    TextView tv6;
-    TextView tv7;
-    TextView tv8;
-    TextView tv9;
-    TextView tv10;
-
-    /**
-     * Symbols imageview
-     */
-
-    ImageView iv_s1;
-    ImageView iv_s2;
-    ImageView iv_s3;
-    ImageView iv_s4;
-    ImageView iv_s5;
-    ImageView iv_s6;
-    ImageView iv_s7;
-    ImageView iv_s8;
-    ImageView iv_s9;
-    ImageView iv_s10;
-
-    /**
-     * materials imageview
-     */
-
-    ImageView iv_m1;
-    ImageView iv_m2;
-    ImageView iv_m3;
-    ImageView iv_m4;
-    ImageView iv_m5;
-
 
     /**
      * materials imageview
@@ -197,12 +125,12 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        initView();
+      //  initView();
         initparam();
         assetManager = getAssets();
-        setLeftDrawer();
+    //    setLeftDrawer();
         setRightDrawer();
-        initdailogs();
+     //   initdailogs();
         ll_util.post(() -> {
             width = ll_util.getWidth();
             height = ll_util.getHeight();
@@ -216,13 +144,13 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         params_symbols = new ViewGroup.LayoutParams(40, 40);
         params_material = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params_shapimage = new ViewGroup.LayoutParams(90, 90);
-        AddTextViews();
+        /*AddTextViews();
         AddSymbolsViews();
-        AddMaterialsView();
-        AddImages();
+        AddMaterialsView();*/
+//        AddImages();
     }
 
-    private void initdailogs() {
+   /* private void initdailogs() {
         heightDialog = new HeightDialog(Main2Activity.this, this);
         widthDialog = new WidthDialog(Main2Activity.this, this);
         rotateDialog = new RotateDialog(Main2Activity.this, this);
@@ -231,16 +159,16 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         textViewSizeDialog = new TextViewSizeDialog(Main2Activity.this, this);
         heightWidthDialog = new HeightWidthDialog(Main2Activity.this, this);
 
-    }
+    }*/
 
     private void setRightDrawer() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(R.id.container2, new MainFragment()).commit();
+
 
     }
 
-    @SuppressLint("WrongViewCast")
+   /* @SuppressLint("WrongViewCast")
     private void initView() {
 
         card_main = findViewById(R.id.card_main);
@@ -263,8 +191,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         iv_nav2_back.setOnClickListener(this);
         recyclerView = findViewById(R.id.recyclerview);
 
-        /**
-         * util imageview find*/
+        *//**
+         * util imageview find*//*
 
         iv_rotate = findViewById(R.id.iv_rotate);
         iv_width = findViewById(R.id.iv_width);
@@ -291,41 +219,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         iv_gellary.setOnClickListener(this);
 
     }
+*/
 
-    private void AddMaterialsView() {
-        iv_m1 = new ImageView(this);
-        iv_m2 = new ImageView(this);
-        iv_m3 = new ImageView(this);
-        iv_m4 = new ImageView(this);
-        iv_m5 = new ImageView(this);
-        iv_m1.setLayoutParams(params_material);
-        iv_m2.setLayoutParams(params_material);
-        iv_m3.setLayoutParams(params_material);
-        iv_m4.setLayoutParams(params_material);
-        iv_m5.setLayoutParams(params_material);
-        iv_m1.setOnTouchListener(this);
-        iv_m2.setOnTouchListener(this);
-        iv_m3.setOnTouchListener(this);
-        iv_m4.setOnTouchListener(this);
-        iv_m5.setOnTouchListener(this);
-        iv_m1.setImageResource(R.drawable.ic_symbols);
-        iv_m2.setImageResource(R.drawable.ic_symbols);
-        iv_m3.setImageResource(R.drawable.ic_symbols);
-        iv_m4.setImageResource(R.drawable.ic_symbols);
-        iv_m5.setImageResource(R.drawable.ic_symbols);
-        iv_m1.setVisibility(View.GONE);
-        iv_m2.setVisibility(View.GONE);
-        iv_m3.setVisibility(View.GONE);
-        iv_m4.setVisibility(View.GONE);
-        iv_m5.setVisibility(View.GONE);
-        root.addView(iv_m1);
-        root.addView(iv_m2);
-        root.addView(iv_m3);
-        root.addView(iv_m4);
-        root.addView(iv_m5);
-    }
-
-    private void AddImages() {
+   /* private void AddImages() {
         iv_pic1 = new EffectiveShapeView(this);
         iv_pic2 = new EffectiveShapeView(this);
         iv_pic3 = new EffectiveShapeView(this);
@@ -363,136 +259,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         root.addView(iv_pic5);
     }
 
-    private void AddSymbolsViews() {
-        iv_s1 = new ImageView(Main2Activity.this);
-        iv_s2 = new ImageView(Main2Activity.this);
-        iv_s3 = new ImageView(Main2Activity.this);
-        iv_s4 = new ImageView(Main2Activity.this);
-        iv_s5 = new ImageView(Main2Activity.this);
-        iv_s6 = new ImageView(Main2Activity.this);
-        iv_s7 = new ImageView(Main2Activity.this);
-        iv_s8 = new ImageView(Main2Activity.this);
-        iv_s9 = new ImageView(Main2Activity.this);
-        iv_s10 = new ImageView(Main2Activity.this);
 
-        /*
-        iv_s1 = new MultiColorIconView(Main2Activity.this, Utils.getAttributeset());
-        iv_s2 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s3 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s4 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s5 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s6 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s7 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s8 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s9 = new MultiColorIconView(this, Utils.getAttributeset());
-        iv_s10 = new MultiColorIconView(this, Utils.getAttributeset());*/
-        iv_s1.setLayoutParams(params_symbols);
-        iv_s2.setLayoutParams(params_symbols);
-        iv_s3.setLayoutParams(params_symbols);
-        iv_s4.setLayoutParams(params_symbols);
-        iv_s5.setLayoutParams(params_symbols);
-        iv_s6.setLayoutParams(params_symbols);
-        iv_s7.setLayoutParams(params_symbols);
-        iv_s8.setLayoutParams(params_symbols);
-        iv_s9.setLayoutParams(params_symbols);
-        iv_s10.setLayoutParams(params_symbols);
-        iv_s1.setOnTouchListener(this);
-        iv_s2.setOnTouchListener(this);
-        iv_s3.setOnTouchListener(this);
-        iv_s4.setOnTouchListener(this);
-        iv_s5.setOnTouchListener(this);
-        iv_s6.setOnTouchListener(this);
-        iv_s7.setOnTouchListener(this);
-        iv_s8.setOnTouchListener(this);
-        iv_s9.setOnTouchListener(this);
-        iv_s10.setOnTouchListener(this);
-        iv_s1.setImageResource(R.drawable.ic_symbols);
-        iv_s2.setImageResource(R.drawable.ic_symbols);
-        iv_s3.setImageResource(R.drawable.ic_symbols);
-        iv_s4.setImageResource(R.drawable.ic_symbols);
-        iv_s5.setImageResource(R.drawable.ic_symbols);
-        iv_s6.setImageResource(R.drawable.ic_symbols);
-        iv_s7.setImageResource(R.drawable.ic_symbols);
-        iv_s8.setImageResource(R.drawable.ic_symbols);
-        iv_s9.setImageResource(R.drawable.ic_symbols);
-        iv_s10.setImageResource(R.drawable.ic_symbols);
-        iv_s1.setVisibility(View.GONE);
-        iv_s2.setVisibility(View.GONE);
-        iv_s3.setVisibility(View.GONE);
-        iv_s4.setVisibility(View.GONE);
-        iv_s5.setVisibility(View.GONE);
-        iv_s6.setVisibility(View.GONE);
-        iv_s7.setVisibility(View.GONE);
-        iv_s8.setVisibility(View.GONE);
-        iv_s9.setVisibility(View.GONE);
-        iv_s10.setVisibility(View.GONE);
-        root.addView(iv_s1);
-        root.addView(iv_s2);
-        root.addView(iv_s3);
-        root.addView(iv_s4);
-        root.addView(iv_s5);
-        root.addView(iv_s6);
-        root.addView(iv_s7);
-        root.addView(iv_s8);
-        root.addView(iv_s9);
-        root.addView(iv_s10);
-
-    }
-
-    private void AddTextViews() {
-        tv1 = new TextView(this);
-        tv2 = new TextView(this);
-        tv3 = new TextView(this);
-        tv4 = new TextView(this);
-        tv5 = new TextView(this);
-        tv6 = new TextView(this);
-        tv7 = new TextView(this);
-        tv8 = new TextView(this);
-        tv9 = new TextView(this);
-        tv10 = new TextView(this);
-        tv1.setLayoutParams(params);
-        tv2.setLayoutParams(params);
-        tv3.setLayoutParams(params);
-        tv4.setLayoutParams(params);
-        tv5.setLayoutParams(params);
-        tv6.setLayoutParams(params);
-        tv7.setLayoutParams(params);
-        tv8.setLayoutParams(params);
-        tv9.setLayoutParams(params);
-        tv10.setLayoutParams(params);
-
-       /* TextViewCompat.setAutoSizeTextTypeWithDefaults(tv1, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv2, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv3, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv4, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv5, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv6, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv7, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv8, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv9, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-        TextViewCompat.setAutoSizeTextTypeWithDefaults(tv10, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
-      */
-        tv1.setOnTouchListener(this);
-        tv2.setOnTouchListener(this);
-        tv3.setOnTouchListener(this);
-        tv4.setOnTouchListener(this);
-        tv5.setOnTouchListener(this);
-        tv6.setOnTouchListener(this);
-        tv7.setOnTouchListener(this);
-        tv8.setOnTouchListener(this);
-        tv9.setOnTouchListener(this);
-        tv10.setOnTouchListener(this);
-        root.addView(tv1);
-        root.addView(tv2);
-        root.addView(tv3);
-        root.addView(tv4);
-        root.addView(tv5);
-        root.addView(tv6);
-        root.addView(tv7);
-        root.addView(tv8);
-        root.addView(tv9);
-        root.addView(tv10);
-    }
 
     private void setLeftDrawer() {
 
@@ -505,9 +272,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         listnav1.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
         adapater = new ComponetAdapater(Main2Activity.this, listnav1);
         listViewnav1.setAdapter(adapater);
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_menu:
@@ -531,8 +298,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
 
-            /**
-             * util imageview clickes*/
+            *//**
+             * util imageview clickes*//*
 
             case R.id.iv_width:
                 widthDialog.show();
@@ -578,22 +345,22 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 heightWidthDialog.setMax_Progress(height, 40);
                 break;
         }
-    }
+    }*/
 
-    private void deleteView() {
+   /* private void deleteView() {
         try {
             if (view != null) {
                 view.setVisibility(View.GONE);
             }
         } catch (Exception e) {
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
-            /**
-             * bg layer one*/
+            *//**
+             * bg layer one*//*
             case 0:
 //                setDialodlayerOne();
                 WorkOnLayerOne = 1;
@@ -606,9 +373,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
 
                 HideNavigationLeft();
                 break;
-            /**
+            *//**
              *bg layer two
-             */
+             *//*
             case 1:
                 //startActivityForResult(new Intent(Main2Activity.this, LayerTwoActivity.class), REQUEST_CODE);
                 WorkOnLayerOne = 0;
@@ -625,8 +392,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
                 HideNavigationLeft();
                 break;
-            /**
-             * image*/
+            *//**
+             * image*//*
             case 2:
                 WorkOnLayerOne = 0;
                 WorkOnLayerTwo = 0;
@@ -638,8 +405,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 shapedImageViewDialog.show();
                 HideNavigationLeft();
                 break;
-            /**
-             * text*/
+            *//**
+             * text*//*
             case 3:
                 try {
 
@@ -658,8 +425,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
 
                 break;
-            /**
-             *  material*/
+            *//**
+             *  material*//*
             case 4:
                 WorkOnLayerThree = 0;
                 WorkOnLayerTwo = 0;
@@ -674,8 +441,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 }
                 HideNavigationLeft();
                 break;
-            /**
-             * symbols*/
+            *//**
+             * symbols*//*
             case 5:
                 WorkOnLayerThree = 0;
                 WorkOnLayerTwo = 0;
@@ -696,86 +463,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
-    private void addMaterialtoImageview() throws Exception {
-        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
-        if (iv_m1.getVisibility() == View.GONE) {
-            iv_m1.setVisibility(View.VISIBLE);
-            iv_m1.bringToFront();
-            view = iv_m1;
-        } else if (iv_m2.getVisibility() == View.GONE) {
-            iv_m2.setVisibility(View.VISIBLE);
-            iv_m1.bringToFront();
-            view = iv_m2;
-        } else if (iv_m3.getVisibility() == View.GONE) {
-            iv_m3.setVisibility(View.VISIBLE);
-            iv_m1.bringToFront();
-            view = iv_m3;
-        } else if (iv_m4.getVisibility() == View.GONE) {
-            iv_m4.setVisibility(View.VISIBLE);
-            iv_m1.bringToFront();
-            view = iv_m4;
-        } else if (iv_m5.getVisibility() == View.GONE) {
-            iv_m5.setVisibility(View.VISIBLE);
-            iv_m1.bringToFront();
-            view = iv_m5;
-        }
+*/
 
 
-    }
-
-
-    private void addSymbolstoImageview() throws Exception {
-        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
-        if (iv_s1.getVisibility() == View.GONE) {
-            iv_s1.setVisibility(View.VISIBLE);
-            view = iv_s1;
-            view.bringToFront();
-        } else if (iv_s2.getVisibility() == View.GONE) {
-            iv_s2.setVisibility(View.VISIBLE);
-            view = iv_s2;
-            view.bringToFront();
-
-        } else if (iv_s3.getVisibility() == View.GONE) {
-            iv_s3.setVisibility(View.VISIBLE);
-            view = iv_s3;
-            view.bringToFront();
-
-        } else if (iv_s4.getVisibility() == View.GONE) {
-            iv_s4.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s4;
-        } else if (iv_s5.getVisibility() == View.GONE) {
-            iv_s5.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s5;
-        } else if (iv_s6.getVisibility() == View.GONE) {
-            iv_s6.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s6;
-        } else if (iv_s7.getVisibility() == View.GONE) {
-            iv_s7.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s7;
-        } else if (iv_s8.getVisibility() == View.GONE) {
-            iv_s8.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s8;
-        } else if (iv_s9.getVisibility() == View.GONE) {
-            iv_s9.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s9;
-        } else if (iv_s10.getVisibility() == View.GONE) {
-            iv_s10.setVisibility(View.VISIBLE);
-            view.bringToFront();
-            view = iv_s10;
-        }
-
-
-    }
-
-    private View addImagetoImageview() throws Exception {
-        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
+    /*private View addImagetoImageview() throws Exception {
+//        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
         if (iv_pic1.getVisibility() == View.GONE) {
             iv_pic1.setVisibility(View.VISIBLE);
             view = iv_pic1;
@@ -805,9 +497,9 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             return null;
         }
     }
+*/
 
-
-    private void HideNavigationLeft() {
+    /*private void HideNavigationLeft() {
         try {
             if (drawerLayout.isDrawerVisible(Gravity.LEFT)) {
                 drawerLayout.closeDrawer(Gravity.LEFT);
@@ -815,76 +507,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
         }
     }
+*/
 
-    private void AddTextViewsText() throws Exception {
 
-        if (tv1.getText().toString().isEmpty()) {
-            EditTextViewDialog(tv1);
-            view.bringToFront();
-            view = tv1;
-        } else if (tv2.getText().toString().isEmpty()) {
-            view = tv2;
-            view.bringToFront();
-            EditTextViewDialog(tv2);
-        } else if (tv3.getText().toString().isEmpty()) {
-            view = tv3;
-            view.bringToFront();
-            EditTextViewDialog(tv3);
-        } else if (tv4.getText().toString().isEmpty()) {
-            view = tv4;
-            view.bringToFront();
-            EditTextViewDialog(tv4);
-        } else if (tv5.getText().toString().isEmpty()) {
-            view = tv5;
-            view.bringToFront();
-            EditTextViewDialog(tv5);
-        } else if (tv6.getText().toString().isEmpty()) {
-            view = tv6;
-            view.bringToFront();
-            EditTextViewDialog(tv6);
-        } else if (tv7.getText().toString().isEmpty()) {
-            EditTextViewDialog(tv7);
-            view.bringToFront();
-            view = tv7;
-        } else if (tv8.getText().toString().isEmpty()) {
-            EditTextViewDialog(tv8);
-            view.bringToFront();
-            view = tv8;
-        } else if (tv9.getText().toString().isEmpty()) {
-            EditTextViewDialog(tv9);
-            view.bringToFront();
-            view = tv9;
-        } else if (tv10.getText().toString().isEmpty()) {
-            EditTextViewDialog(tv10);
-            view.bringToFront();
-            view = tv10;
-        }
-
-    }
-
-    private void EditTextViewDialog(TextView tv) {
-        Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        dialog.setContentView(R.layout.edittextview);
-        EditText et_entertext = dialog.findViewById(R.id.et_enter);
-        TextView tv_ok = dialog.findViewById(R.id.tv_ok);
-        TextView tv_cancel = dialog.findViewById(R.id.tv_cancel);
-        RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tv_ok.setOnClickListener(v -> {
-            if (!et_entertext.getText().toString().isEmpty()) {
-                tv.setLayoutParams(param);
-                tv.setText(et_entertext.getText().toString());
-            }
-            dialog.dismiss();
-        });
-        tv_cancel.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-        dialog.show();
-    }
-
-    private void addListToLayerOne() throws IOException {
+   /* private void addListToLayerOne() throws IOException {
         backgroundLists.clear();
         BackGroundAdapter adapter = new BackGroundAdapter(backgroundLists, this, this);
         LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -897,12 +523,12 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         }
         adapter.notifyDataSetChanged();
     }
-
+*/
     /**
      * add list of symbols
      */
 
-    private void addListToLayerSix() throws IOException {
+   /* private void addListToLayerSix() throws IOException {
 
         symbolsLists.clear();
         BackGroundAdapter adapter = new BackGroundAdapter(symbolsLists, this, this);
@@ -916,8 +542,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         }
         adapter.notifyDataSetChanged();
     }
-
-    private void setDialodlayerOne() {
+*/
+   /* private void setDialodlayerOne() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -936,8 +562,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         dialog.show();
 
     }
-
-    @Override
+*/
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && data != null) {
@@ -947,45 +573,6 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void LoadFontList() {
-        ArrayList<FontModel> fontList = new ArrayList<>();
-        fontList.add(new FontModel("abeezee", ResourcesCompat.getFont(getApplicationContext(), R.font.abeezee)));
-        fontList.add(new FontModel("abhaya_libre", ResourcesCompat.getFont(getApplicationContext(), R.font.abhaya_libre)));
-        fontList.add(new FontModel("abril_fatface", ResourcesCompat.getFont(getApplicationContext(), R.font.abril_fatface)));
-        fontList.add(new FontModel("aclonica", ResourcesCompat.getFont(getApplicationContext(), R.font.aclonica)));
-        fontList.add(new FontModel("acme", ResourcesCompat.getFont(getApplicationContext(), R.font.acme)));
-        fontList.add(new FontModel("advent_pro_thin", ResourcesCompat.getFont(getApplicationContext(), R.font.advent_pro_thin)));
-        fontList.add(new FontModel("aguafina_script", ResourcesCompat.getFont(getApplicationContext(), R.font.aguafina_script)));
-        fontList.add(new FontModel("akronim", ResourcesCompat.getFont(getApplicationContext(), R.font.akronim)));
-        fontList.add(new FontModel("aladin", ResourcesCompat.getFont(getApplicationContext(), R.font.aladin)));
-        fontList.add(new FontModel("aldrich", ResourcesCompat.getFont(getApplicationContext(), R.font.aldrich)));
-        fontList.add(new FontModel("alfa_slab_one", ResourcesCompat.getFont(getApplicationContext(), R.font.alfa_slab_one)));
-        fontList.add(new FontModel("allan", ResourcesCompat.getFont(getApplicationContext(), R.font.allan)));
-        fontList.add(new FontModel("allura", ResourcesCompat.getFont(getApplicationContext(), R.font.allura)));
-        fontList.add(new FontModel("almendra_display", ResourcesCompat.getFont(getApplicationContext(), R.font.almendra_display)));
-        fontList.add(new FontModel("architects_daughter", ResourcesCompat.getFont(getApplicationContext(), R.font.architects_daughter)));
-        fontList.add(new FontModel("arizonia", ResourcesCompat.getFont(getApplicationContext(), R.font.arizonia)));
-        fontList.add(new FontModel("astloch", ResourcesCompat.getFont(getApplicationContext(), R.font.astloch)));
-        fontList.add(new FontModel("bangers", ResourcesCompat.getFont(getApplicationContext(), R.font.bangers)));
-        fontList.add(new FontModel("bonbon", ResourcesCompat.getFont(getApplicationContext(), R.font.bonbon)));
-        fontList.add(new FontModel("bungee_hairline", ResourcesCompat.getFont(getApplicationContext(), R.font.bungee_hairline)));
-        fontList.add(new FontModel("bungee_inline", ResourcesCompat.getFont(getApplicationContext(), R.font.bungee_inline)));
-        fontList.add(new FontModel("bungee_shade", ResourcesCompat.getFont(getApplicationContext(), R.font.bungee_shade)));
-        fontList.add(new FontModel("butcherman", ResourcesCompat.getFont(getApplicationContext(), R.font.butcherman)));
-        fontList.add(new FontModel("butterfly_kids", ResourcesCompat.getFont(getApplicationContext(), R.font.butterfly_kids)));
-        fontList.add(new FontModel("codystar_light", ResourcesCompat.getFont(getApplicationContext(), R.font.codystar_light)));
-        fontList.add(new FontModel("diplomata_sc", ResourcesCompat.getFont(getApplicationContext(), R.font.diplomata_sc)));
-        fontList.add(new FontModel("ewert", ResourcesCompat.getFont(getApplicationContext(), R.font.ewert)));
-        fontList.add(new FontModel("faster_one", ResourcesCompat.getFont(getApplicationContext(), R.font.faster_one)));
-        fontList.add(new FontModel("fontdiner_swanky", ResourcesCompat.getFont(getApplicationContext(), R.font.fontdiner_swanky)));
-        fontList.add(new FontModel("monoton", ResourcesCompat.getFont(getApplicationContext(), R.font.monoton)));
-        fontList.add(new FontModel("waiting_for_the_sunrise", ResourcesCompat.getFont(getApplicationContext(), R.font.waiting_for_the_sunrise)));
-        fontList.add(new FontModel("warnes", ResourcesCompat.getFont(getApplicationContext(), R.font.warnes)));
-        RecylerBotttomAdapter adapter = new RecylerBotttomAdapter(this, fontList, this);
-        LinearLayoutManager manager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
-    }
 
     @Override
     public void OnItemClickLister(int position, Typeface typeface) {
@@ -1189,8 +776,8 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
         }
     }
-
-    @Override
+*/
+    /*@Override
     public void ImageResize(int size) {
         Log.e("ImageResize", "ImageResize is called");
 
@@ -1262,20 +849,10 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         }
         root.invalidate();
         return true;
-    }
+    }*/
 
 
-    public void saveBitmap() {
-        try {
-            card_main.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(card_main.getDrawingCache());
-            card_main.setDrawingCacheEnabled(false);
-            Log.e("saveBitmap", "saveBitmap   bitmap   " + bitmap);
 
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
 
 
     class SaveBitmap extends AsyncTask {

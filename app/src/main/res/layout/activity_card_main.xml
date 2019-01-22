@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="horizontal"
     tools:context=".activities.CardMainActivity">
 
@@ -28,22 +29,62 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_root"
+        <LinearLayout
+            android:id="@+id/ll_util1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/root_container"
-            android:layout_margin="@dimen/size15dp">
+            android:layout_above="@+id/root_container1"
+            android:layout_margin="@dimen/size10dp">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00112121"
+                app:cardBackgroundColor="#00112121">
+
+                <ImageView
+                    android:id="@+id/layerone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY">
+
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/root"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false">
 
 
-        </android.support.v7.widget.CardView>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/root_container"
+            android:id="@+id/root_container1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size90dp"
             android:layout_alignParentBottom="true"
-            android:orientation="vertical"></FrameLayout>
+            android:background="@color/colorwhite"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/root_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
     </RelativeLayout>
 

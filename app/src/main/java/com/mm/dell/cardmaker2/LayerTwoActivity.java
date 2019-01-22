@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.mm.dell.cardmaker2.Adapters.ComponetAdapater;
-import com.mm.dell.cardmaker2.fragments.MainFragment;
+
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
     private void setRightDrawer() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
-        ft.replace(R.id.container2, new MainFragment()).commit();
 
     }
 
