@@ -91,8 +91,8 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     ImageView iv_m3;
     ImageView iv_m4;
     ImageView iv_m5;
-    private static int width;
-    private static int height;
+    public int width;
+    public int height;
 
 
     @Override
@@ -144,7 +144,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
                 break;
             case 1:
-                AddTextViewsText();
+
                 try {
                     FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                     ft1.replace(containerId, new TextFragmentFragment()).commit();
@@ -158,7 +158,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 try {
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                     ft2.replace(containerId, new MaterialsFragment()).commit();
-                    addMaterialtoImageview();
+
                 } catch (Exception e) {
                     Log.e("Exception", " while adding materials e - " + e.getMessage());
                     e.printStackTrace();
@@ -180,7 +180,9 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     @Override
     public void OnRotate(int r) {
         new Handler().post(() -> {
-            selecteview.setRotation(r);
+            if (selecteview != null) {
+                selecteview.setRotation(r);
+            }
         });
     }
 
@@ -207,7 +209,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     @Override
     public void OnBrigthness(float b) {
         new Handler().post(() -> {
-        selecteview.setAlpha(b);
+            selecteview.setAlpha(b);
         });
     }
 
@@ -224,7 +226,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     }
 
     @Override
-    public void getBitmapFromGallery(Bitmap bitmap) {
+    public void getBitmapImage(Bitmap bitmap) {
 
     }
 
@@ -238,7 +240,17 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
     }
 
-    private void AddMaterialsView() {
+    @Override
+    public void DeleteView() {
+        if (selecteview != null) {
+            try {
+                selecteview.setVisibility(View.GONE);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public void AddMaterialsView() {
         iv_m1 = new ImageView(this);
         iv_m2 = new ImageView(this);
         iv_m3 = new ImageView(this);
@@ -336,7 +348,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     }
 
 
-    private void AddTextViewsText() {
+    public void AddTextViewsText() {
 
         if (tv1.getText().toString().isEmpty()) {
             new EditTextViewDialog(this, null, this).show();
@@ -444,7 +456,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         root.addView(tv10);
     }
 
-    private void addMaterialtoImageview() throws Exception {
+    public void addMaterialtoImageview() throws Exception {
         Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
         if (iv_m1.getVisibility() == View.GONE) {
             iv_m1.setVisibility(View.VISIBLE);

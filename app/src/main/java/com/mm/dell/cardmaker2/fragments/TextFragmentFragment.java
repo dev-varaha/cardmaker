@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.Dialogs.EditTextViewDialog;
 import com.mm.dell.cardmaker2.FontModel;
 import com.mm.dell.cardmaker2.Main2Activity;
@@ -24,7 +26,7 @@ import com.mm.dell.cardmaker2.activities.CardMainActivity;
 
 import java.util.ArrayList;
 
-public class TextFragmentFragment extends Fragment implements View.OnClickListener {
+public class TextFragmentFragment extends Fragment implements View.OnClickListener, ColorPicker2dialog.colorpickercallback {
 
     ImageView iv_opacity;
     ImageView iv_size;
@@ -32,12 +34,13 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
     ImageView iv_deleteview;
     ImageView iv_colorpicker;
     ImageView iv_rotate;
-    ImageView iv_addView;
+    ImageView iv_addtext;
 
     SeekBarChange seekBarChange;
     RecyclerView recyclerview;
     SeekBar seek;
     int handle_seekbar = 7899;
+    private String TAG = TextFragmentFragment.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
     }
 
     private void initView(View view) {
-        seek = view.findViewById(R.id.seek);
+        seek = view.findViewById(R.id.seek_text);
         recyclerview = view.findViewById(R.id.recyclerview);
         iv_opacity = view.findViewById(R.id.iv_opacity);
         iv_opacity.setOnClickListener(this);
@@ -66,6 +69,9 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
         iv_edittext = view.findViewById(R.id.iv_edittext);
         iv_edittext.setOnClickListener(this);
 
+        iv_addtext = view.findViewById(R.id.iv_addtext);
+        iv_addtext.setOnClickListener(this);
+
         iv_deleteview = view.findViewById(R.id.iv_deleteview);
         iv_deleteview.setOnClickListener(this);
 
@@ -74,13 +80,14 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
 
         iv_rotate = view.findViewById(R.id.iv_rotate);
         iv_rotate.setOnClickListener(this);
-        seek.setOnSeekBarChangeListener(onSeekBarChangeListener);
+
     }
 
 
     SeekBar.OnSeekBarChangeListener onSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            Log.e(TAG, "  seek progress change is being called");
             switch (handle_seekbar) {
                 //rotate
                 case 11:
@@ -115,20 +122,73 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_rotate:
-                seek.setMax(360);
-                handle_seekbar = 11;
+                try {
+                    seek.setOnSeekBarChangeListener(null);
+                    Log.e(TAG, "iv_rotate is being called");
+                    seek.setMax(360);
+                    handle_seekbar = 11;
+                    seek.setOnSeekBarChangeListener(onSeekBarChangeListener);
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
+
                 break;
             case R.id.iv_textsized:
-                seek.setMax(Main2Activity.width);
-                handle_seekbar = 12;
+                try {
+                    seek.setOnSeekBarChangeListener(null);
+                    Log.e(TAG, "iv_textsized is being called");
+                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    seek.setMax(activity1.width);
+                    seek.setProgress(14);
+                    handle_seekbar = 12;
+                    seek.setOnSeekBarChangeListener(onSeekBarChangeListener);
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
 
             case R.id.iv_opacity:
-                seek.setMax(100);
-                handle_seekbar = 13;
+                try {
+                    seek.setOnSeekBarChangeListener(null);
+                    Log.e(TAG, "iv_opacity is being called");
+                    seek.setMax(100);
+                    seek.setProgress(99);
+                    handle_seekbar = 13;
+                    seek.setOnSeekBarChangeListener(onSeekBarChangeListener);
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
+
                 break;
 
             case R.id.iv_colorpicker:
+                try {
+                    ColorPicker2dialog dialog = new ColorPicker2dialog(getActivity(), this);
+                    dialog.show();
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
+
+                break;
+            case R.id.iv_addtext:
+                try {
+                    Log.e(TAG, "add text is being called");
+                    CardMainActivity activity2 = (CardMainActivity) getActivity();
+                    assert activity2 != null;
+                    activity2.AddTextViewsText();
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
 
                 break;
 
@@ -143,11 +203,21 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
                     } else {
                         new EditTextViewDialog(getActivity(), null, ontextChange).show();
                     }
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
                 } catch (Exception e) {
                 }
                 break;
 
             case R.id.iv_deleteview:
+                try {
+                    seekBarChange.DeleteView();
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
 
                 break;
         }
@@ -194,4 +264,8 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
         recyclerview.setAdapter(adapter);
     }
 
+    @Override
+    public void getColor(int i, int i1, int i2) {
+        seekBarChange.OnColorChanges(i, i1, i2);
+    }
 }

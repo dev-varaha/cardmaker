@@ -180,7 +180,7 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void getBitmapFromGallery(Bitmap bitmap) {
+    public void getBitmapImage(Bitmap bitmap) {
 
     }
 
@@ -191,6 +191,11 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void ImageResize(int size) {
+
+    }
+
+    @Override
+    public void DeleteView() {
 
     }
 

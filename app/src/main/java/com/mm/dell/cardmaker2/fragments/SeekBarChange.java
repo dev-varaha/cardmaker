@@ -18,9 +18,11 @@ public interface SeekBarChange {
 
     void OnColorChanges(int i, int i2, int i3);
 
-    void getBitmapFromGallery(Bitmap bitmap);
+    void getBitmapImage(Bitmap bitmap);
 
     void setShapeImageView(int color, int side, int borderwidth, int shapeType);
 
     void ImageResize(int size);
+
+    void DeleteView();
 }

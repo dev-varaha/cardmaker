@@ -5,6 +5,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,13 +14,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
+import com.mm.dell.cardmaker2.Adapters.MaterialSymbolAdapter;
 import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.R;
+import com.mm.dell.cardmaker2.activities.CardMainActivity;
+
+import java.util.ArrayList;
 
 public class MaterialsFragment extends Fragment implements View.OnClickListener, ColorPicker2dialog.colorpickercallback {
 
     ImageView iv_opacity;
     ImageView iv_size;
+    ImageView iv_addview;
 
     ImageView iv_deleteview;
     ImageView iv_colorpicker;
@@ -27,6 +34,7 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
     private SeekBarChange seekBarChange;
     private int Handle_SeekBar = 8989;
     private SeekBar seek;
+    RecyclerView recyclerview;
 
 
     public MaterialsFragment() {
@@ -38,13 +46,27 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_materials, container, false);
         initView(view);
         seekBarChange = (SeekBarChange) getActivity();
+        LoadMaterial();
         return view;
+    }
+
+    private void LoadMaterial() {
+        ArrayList<String> materialList = new ArrayList<>();
+
+        MaterialSymbolAdapter adapter = new MaterialSymbolAdapter(getActivity(), materialList, (SeekBarChange) getActivity());
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerview.setAdapter(adapter);
     }
 
     private void initView(View view) {
         seek = view.findViewById(R.id.seek);
+        recyclerview = view.findViewById(R.id.recyclerview);
+
         iv_opacity = view.findViewById(R.id.iv_opacity);
         iv_opacity.setOnClickListener(this);
+
+        iv_addview = view.findViewById(R.id.iv_addview);
+        iv_addview.setOnClickListener(this);
 
         iv_size = view.findViewById(R.id.iv_sized);
         iv_size.setOnClickListener(this);
@@ -57,35 +79,80 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
 
         iv_rotate = view.findViewById(R.id.iv_rotate);
         iv_rotate.setOnClickListener(this);
-        seek.setOnSeekBarChangeListener(seekBarChangeListener);
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_rotate:
-                seek.setMax(360);
-                Handle_SeekBar = 11;
+                try {
+                    seek.setMax(360);
+                    Handle_SeekBar = 11;
+                    seek.setOnSeekBarChangeListener(seekBarChangeListener);
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
             case R.id.iv_sized:
+                try {
+                    Handle_SeekBar = 12;
+                    seek.setOnSeekBarChangeListener(seekBarChangeListener);
 
-                Handle_SeekBar = 12;
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
 
             case R.id.iv_opacity:
-                seek.setMax(100);
-                Handle_SeekBar = 13;
+                try {
+                    seek.setMax(100);
+                    Handle_SeekBar = 13;
+                    seek.setOnSeekBarChangeListener(seekBarChangeListener);
+                    if (seek.getVisibility() == View.GONE) {
+                        seek.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
 
             case R.id.iv_colorpicker:
-                ColorPicker2dialog dialog = new ColorPicker2dialog(getActivity(), this);
-                dialog.show();
+                try {
+
+                    ColorPicker2dialog dialog = new ColorPicker2dialog(getActivity(), this);
+                    dialog.show();
+
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
 
             case R.id.iv_deleteview:
-
+                try {
+                    seekBarChange.DeleteView();
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
                 break;
+            case R.id.iv_addview:
+                try {
+                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    activity1.addMaterialtoImageview();
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                }
+                break;
+
+
         }
 
     }

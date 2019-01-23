@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -102,7 +101,7 @@ public class GalleryDialog extends Dialog implements View.OnClickListener {
                 Bitmap bitmap = BitmapFactory.decodeFile(arrayList.get(i));
                 imageHolder.imageView.setImageBitmap(bitmap);
                 imageHolder.imageView.setOnClickListener(v -> {
-                    seekBarChange.getBitmapFromGallery(bitmap);
+                    seekBarChange.getBitmapImage(bitmap);
                 });
 
 

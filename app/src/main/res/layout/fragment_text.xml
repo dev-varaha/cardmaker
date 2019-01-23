@@ -7,12 +7,13 @@
     tools:context=".fragments.TextFragmentFragment">
 
     <SeekBar
-        android:id="@+id/seek"
+        android:id="@+id/seek_text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size10dp"
         android:layout_margin="@dimen/size3dp"
         android:progressDrawable="@drawable/seekbar_styl"
-        android:thumb="@drawable/custom_thumb" />
+        android:thumb="@drawable/custom_thumb"
+        android:visibility="gone" />
 
     <HorizontalScrollView
         android:id="@+id/scrollutil"
@@ -25,6 +26,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_addtext"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_add" />
+
 
             <ImageView
                 android:id="@+id/iv_textsized"

@@ -733,10 +733,10 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     @Override
-    public void getBitmapFromGallery(Bitmap bitmap) {
-        Log.e("getBitmapFromGallery", "getBitmapFromGallery is called");
+    public void getBitmapImage(Bitmap bitmap) {
+        Log.e("getBitmapImage", "getBitmapImage is called");
         if (view != null) {
-            Log.e("getBitmapFromGallery", "getBitmapFromGallery is called");
+            Log.e("getBitmapImage", "getBitmapImage is called");
             EffectiveShapeView shapeView = (EffectiveShapeView) view;
             shapeView.setImageBitmap(getRoundedCornerBitmap(bitmap, 0));
         }
