@@ -1,6 +1,7 @@
 package com.mm.dell.cardmaker2.activities;
 
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
@@ -70,7 +71,6 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     /**
      * Symbols imageview
      */
-
     ImageView iv_s1;
     ImageView iv_s2;
     ImageView iv_s3;
@@ -85,7 +85,6 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     /**
      * materials imageview
      */
-
     ImageView iv_m1;
     ImageView iv_m2;
     ImageView iv_m3;
@@ -168,7 +167,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 try {
                     FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
                     ft3.replace(containerId, new SymbolsFragment()).commit();
-                    addSymbolstoImageview();
+
                 } catch (Exception e) {
                     Log.e("Exception", " while adding symbols e - " + e.getMessage());
                     e.printStackTrace();
@@ -220,6 +219,8 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 TextView textView = (TextView) selecteview;
                 textView.setTextColor(i3);
             } else if (selecteview instanceof ImageView) {
+                ImageView mv = (ImageView) selecteview;
+                mv.setColorFilter(i3, PorterDuff.Mode.SRC_IN);
 
             }
         });
@@ -227,7 +228,12 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
     @Override
     public void getBitmapImage(Bitmap bitmap) {
-
+        if (selecteview != null) {
+            if (selecteview instanceof ImageView) {
+                ImageView imageView = (ImageView) selecteview;
+                imageView.setImageBitmap(bitmap);
+            }
+        }
     }
 
     @Override
@@ -237,7 +243,20 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
     @Override
     public void ImageResize(int size) {
-
+        try {
+            if (selecteview != null) {
+                selecteview.post(() -> {
+                    if (selecteview instanceof ImageView) {
+                        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) selecteview.getLayoutParams();
+                        params.height = size;
+                        params.width = size;
+                        ImageView imageView = (ImageView) selecteview;
+                        imageView.setLayoutParams(params);
+                    }
+                });
+            }
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -314,16 +333,6 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         iv_s8.setOnTouchListener(this);
         iv_s9.setOnTouchListener(this);
         iv_s10.setOnTouchListener(this);
-        iv_s1.setImageResource(R.drawable.ic_symbols);
-        iv_s2.setImageResource(R.drawable.ic_symbols);
-        iv_s3.setImageResource(R.drawable.ic_symbols);
-        iv_s4.setImageResource(R.drawable.ic_symbols);
-        iv_s5.setImageResource(R.drawable.ic_symbols);
-        iv_s6.setImageResource(R.drawable.ic_symbols);
-        iv_s7.setImageResource(R.drawable.ic_symbols);
-        iv_s8.setImageResource(R.drawable.ic_symbols);
-        iv_s9.setImageResource(R.drawable.ic_symbols);
-        iv_s10.setImageResource(R.drawable.ic_symbols);
         iv_s1.setVisibility(View.GONE);
         iv_s2.setVisibility(View.GONE);
         iv_s3.setVisibility(View.GONE);
@@ -484,48 +493,56 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     }
 
 
-    private void addSymbolstoImageview() throws Exception {
+    public void addSymbolstoImageview() throws Exception {
         Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
         if (iv_s1.getVisibility() == View.GONE) {
             iv_s1.setVisibility(View.VISIBLE);
+            iv_s1.setImageResource(R.drawable.ic_symbols);
             selecteview = iv_s1;
             selecteview.bringToFront();
         } else if (iv_s2.getVisibility() == View.GONE) {
             iv_s2.setVisibility(View.VISIBLE);
+            iv_s2.setImageResource(R.drawable.ic_symbols);
             selecteview = iv_s2;
             selecteview.bringToFront();
-
         } else if (iv_s3.getVisibility() == View.GONE) {
             iv_s3.setVisibility(View.VISIBLE);
+            iv_s3.setImageResource(R.drawable.ic_symbols);
             selecteview = iv_s3;
             selecteview.bringToFront();
-
         } else if (iv_s4.getVisibility() == View.GONE) {
             iv_s4.setVisibility(View.VISIBLE);
+            iv_s4.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s4;
         } else if (iv_s5.getVisibility() == View.GONE) {
             iv_s5.setVisibility(View.VISIBLE);
+            iv_s5.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s5;
         } else if (iv_s6.getVisibility() == View.GONE) {
             iv_s6.setVisibility(View.VISIBLE);
+            iv_s6.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s6;
         } else if (iv_s7.getVisibility() == View.GONE) {
             iv_s7.setVisibility(View.VISIBLE);
+            iv_s7.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s7;
         } else if (iv_s8.getVisibility() == View.GONE) {
             iv_s8.setVisibility(View.VISIBLE);
+            iv_s8.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s8;
         } else if (iv_s9.getVisibility() == View.GONE) {
             iv_s9.setVisibility(View.VISIBLE);
+            iv_s9.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s9;
         } else if (iv_s10.getVisibility() == View.GONE) {
             iv_s10.setVisibility(View.VISIBLE);
+            iv_s10.setImageResource(R.drawable.ic_symbols);
             selecteview.bringToFront();
             selecteview = iv_s10;
         }

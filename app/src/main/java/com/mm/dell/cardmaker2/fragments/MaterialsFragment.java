@@ -2,6 +2,7 @@ package com.mm.dell.cardmaker2.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,22 +20,29 @@ import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.R;
 import com.mm.dell.cardmaker2.activities.CardMainActivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class MaterialsFragment extends Fragment implements View.OnClickListener, ColorPicker2dialog.colorpickercallback {
 
     ImageView iv_opacity;
     ImageView iv_size;
     ImageView iv_addview;
-
     ImageView iv_deleteview;
     ImageView iv_colorpicker;
     ImageView iv_rotate;
+    ImageView iv_fromgallery;
+
     private String TAG = MaterialsFragment.class.getSimpleName();
     private SeekBarChange seekBarChange;
+
     private int Handle_SeekBar = 8989;
     private SeekBar seek;
+
     RecyclerView recyclerview;
+    private AssetManager assetManager;
 
 
     public MaterialsFragment() {
@@ -45,17 +53,27 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_materials, container, false);
         initView(view);
+        assetManager = getActivity().getAssets();
         seekBarChange = (SeekBarChange) getActivity();
-        LoadMaterial();
+        try {
+            LoadMaterial();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
-    private void LoadMaterial() {
+    private void LoadMaterial() throws IOException {
         ArrayList<String> materialList = new ArrayList<>();
 
-        MaterialSymbolAdapter adapter = new MaterialSymbolAdapter(getActivity(), materialList, (SeekBarChange) getActivity());
+        MaterialSymbolAdapter adapter = new MaterialSymbolAdapter(Objects.requireNonNull(getActivity()), materialList, (SeekBarChange) getActivity());
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerview.setAdapter(adapter);
+        String[] list = assetManager.list("symbols");
+        for (String file : list) {
+            materialList.add("symbols/" + file);
+        }
+        adapter.notifyDataSetChanged();
     }
 
     private void initView(View view) {
@@ -64,6 +82,9 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
 
         iv_opacity = view.findViewById(R.id.iv_opacity);
         iv_opacity.setOnClickListener(this);
+
+        iv_fromgallery = view.findViewById(R.id.iv_fromgallery);
+        iv_fromgallery.setOnClickListener(this);
 
         iv_addview = view.findViewById(R.id.iv_addview);
         iv_addview.setOnClickListener(this);
@@ -86,6 +107,7 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.iv_rotate:
                 try {
+                    seek.setOnSeekBarChangeListener(null);
                     seek.setMax(360);
                     Handle_SeekBar = 11;
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
@@ -97,9 +119,11 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.iv_sized:
                 try {
+                    seek.setOnSeekBarChangeListener(null);
                     Handle_SeekBar = 12;
+                    CardMainActivity activity = (CardMainActivity) getActivity();
+                    seek.setMax(activity.width);
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
-
                     if (seek.getVisibility() == View.GONE) {
                         seek.setVisibility(View.VISIBLE);
                     }
@@ -109,6 +133,7 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
 
             case R.id.iv_opacity:
                 try {
+                    seek.setOnSeekBarChangeListener(null);
                     seek.setMax(100);
                     Handle_SeekBar = 13;
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
@@ -151,6 +176,12 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                 } catch (Exception e) {
                 }
                 break;
+            case R.id.iv_fromgallery:
+                try {
+
+                } catch (Exception e) {
+                }
+                break;
 
 
         }
@@ -168,7 +199,6 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                 case 12:
                     seekBarChange.ImageResize(progress);
                     Log.e(TAG, "  ImageResize is calling ");
-
                     break;
                 case 13:
                     float br = progress / 100f;

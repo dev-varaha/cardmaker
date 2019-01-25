@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size10dp"
         android:layout_margin="@dimen/size3dp"
+        android:visibility="gone"
         android:progressDrawable="@drawable/seekbar_styl"
         android:thumb="@drawable/custom_thumb" />
 
@@ -24,6 +25,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_addview"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_margin="@dimen/size1dp"
+                android:background="@drawable/rounded_background"
+                android:padding="@dimen/size5dp"
+                android:src="@drawable/ic_add" />
+
 
             <ImageView
                 android:id="@+id/iv_size"
