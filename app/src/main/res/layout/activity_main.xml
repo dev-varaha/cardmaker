@@ -3,18 +3,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
+<ImageView
+    android:id="@+id/iv_image"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size300dp"
+    />
 
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size300dp">
-
-    </android.support.v4.view.ViewPager>
-
-    <SeekBar
-        android:id="@+id/seek"
-        android:layout_width="match_parent"
+    <Button
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:max="590" />
+        android:onClick="changecolor"/>
 
+
+    <ImageView
+        android:id="@+id/iv_image2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size300dp"
+        />
 </LinearLayout>
