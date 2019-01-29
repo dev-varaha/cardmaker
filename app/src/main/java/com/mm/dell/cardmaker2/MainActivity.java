@@ -3,6 +3,7 @@ package com.mm.dell.cardmaker2;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,10 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("TAG",">>   "+Color.RED);
 
-        ImageProcessor imageProcessor = new ImageProcessor(bitmap);
-        Bitmap b = imageProcessor.replaceColor(Color.RED, Color.GREEN);
-        imageView2.setImageBitmap(b);
-        Log.e("activity ", "bitmap  b "+b);
+        ImageProcessor imageProcessor = new ImageProcessor(bitmap,this);
+   //     imageProcessor.getPalettes(bitmap);
+        imageView2.setImageBitmap(imageProcessor.replaceColor(0,0));
+//        Log.e("activity ", "bitmap  b "+b);
 
+
+    }
+
+    public void setImage(Bitmap bitmap){
+        imageView2.setImageBitmap(bitmap);
     }
 }

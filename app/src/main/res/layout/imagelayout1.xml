@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/size110dp"
-    android:layout_height="@dimen/size110dp"
+    android:layout_width="@dimen/size30dp"
+    android:layout_height="@dimen/size30dp"
     android:layout_margin="@dimen/size1sp"
-    android:background="@color/colorblacktrans"
-    android:padding="@dimen/size10dp"
-    android:gravity="center_horizontal">
+    android:background="@drawable/rounded_background"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/size3dp">
 
     <com.mm.dell.cardmaker2.layout.EffectiveShapeView
         android:id="@+id/iv"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/background" />
+        android:layout_gravity="center"
+        android:src="@color/colorred" />
 
 </LinearLayout>

@@ -74,7 +74,7 @@
         <FrameLayout
             android:id="@+id/root_container1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size90dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/colorwhite"
             android:orientation="vertical">

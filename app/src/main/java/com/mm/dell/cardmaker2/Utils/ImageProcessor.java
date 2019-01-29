@@ -2,13 +2,21 @@ package com.mm.dell.cardmaker2.Utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
+
+import com.mm.dell.cardmaker2.MainActivity;
+
+import java.util.List;
 
 public class ImageProcessor {
     Bitmap mImage;
     boolean mIsError = false;
+    MainActivity activity;
 
-    public ImageProcessor(final Bitmap image) {
+    public ImageProcessor(final Bitmap image, MainActivity activity) {
+        this.activity = activity;
         mImage = image.copy(image.getConfig(), image.isMutable());
         if (mImage == null) {
             mIsError = true;
@@ -61,7 +69,18 @@ public class ImageProcessor {
             int r = Color.red(pixels[x]);
             int g = Color.green(pixels[x]);
             int b = Color.blue(pixels[x]);
-            if ((r > 240) && (g > 240) && (b > 240)) {
+
+            if ((r > 240) && (g < 100) && (b < 100)) {
+                pixels[x] = Color.GREEN;
+            } else if ((r < 10) && (g < 10) && (b < 10)) {
+                pixels[x] = pixels[x];
+            } else if ((r > 240) && (g > 240) && (b > 240)) {
+                // pixels[x].setColorFilter(Color.RED, PorterDuff.Mode.DARKEN);
+            } else {
+                pixels[x] = Color.GREEN + Color.RED;
+            }
+
+           /* if ((r > 240) && (g > 240) && (b > 240)) {
                  pixels[x] = pixels[x];
             } else if ((r < 10) && (g < 10) && (b < 10)) {
                 pixels[x] = pixels[x];
@@ -79,13 +98,78 @@ public class ImageProcessor {
                 pixels[x] = Color.GREEN;
             } else if ((r < 10) && (g > 240) && (b > 240)) {
                 pixels[x] = Color.GREEN;
+            }*/
+
+           /* if (pixels[x] == Color.RED) {
+                pixels[x] = Color.GREEN;
+            } else if (pixels[x] == Color.GREEN) {
+                pixels[x] = Color.RED;
+
+            } else if (pixels[x] == Color.GRAY) {
+                pixels[x] = Color.GREEN;
+
+            } else if (pixels[x] == Color.DKGRAY) {
+                pixels[x] = Color.GREEN;
+
+            } else if (pixels[x] == Color.BLUE) {
+                pixels[x] = Color.GREEN;
+
+            } else if (pixels[x] == Color.BLACK) {
+                pixels[x] = Color.GREEN;
+
+            } else if (pixels[x] == Color.YELLOW) {
+                pixels[x] = Color.GREEN;
+
+            } else if (pixels[x] == Color.MAGENTA) {
+                pixels[x] = Color.GREEN;
+
             }
+*/
 
         }
+
+        //      getPalettes(mImage);
+
 
         Bitmap newImage = Bitmap.createBitmap(width, height, mImage.getConfig());
         newImage.setPixels(pixels, 0, width, 0, 0, width, height);
 
         return newImage;
     }
+
+    public void getPalettes(Bitmap mImage) {
+
+        Palette.generateAsync(mImage, (Palette.PaletteAsyncListener) palette -> {
+            List<Palette.Swatch> textSwatch = palette.getSwatches();
+            int width = mImage.getWidth();
+            int height = mImage.getHeight();
+            int[] pixels = new int[width * height];
+            mImage.getPixels(pixels, 0, width, 0, 0, width, height);
+            Log.e("Imageproc", "  getPalettes called size " + pixels.length);
+            Log.e("Imageproc", "  getPalettes textSwatch.size() " + textSwatch.size());
+            for (int x = 0; x < pixels.length; ++x) {
+
+                for (int i = 0; i < textSwatch.size(); i++) {
+                    if (textSwatch.get(i).getTitleTextColor() == pixels[x]) {
+
+                        pixels[x] = Color.RED;
+                        Log.e("Imageproc", "  getPalettes IF " + pixels[x]);
+                    }
+                }
+            }
+
+            Bitmap newImage = Bitmap.createBitmap(width, height, mImage.getConfig());
+            newImage.setPixels(pixels, 0, width, 0, 0, width, height);
+            activity.setImage(newImage);
+//                Palette.Swatch textSwatch = palette.getVibrantSwatch();
+
+        });
+    }
+    //  return newImage1;    }
+
+  /*  Palette.generateAsync(bitmap, new Palette.PaletteAsyncListener() {
+        public void onGenerated(Palette palette) {
+            // Do something with colors...
+        }
+    });*/
 }

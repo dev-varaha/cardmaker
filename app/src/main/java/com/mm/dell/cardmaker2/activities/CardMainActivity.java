@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import com.mm.dell.cardmaker2.fragments.BackGroundFragment;
 import com.mm.dell.cardmaker2.Dialogs.EditTextViewDialog;
 import com.mm.dell.cardmaker2.fragments.MaterialsFragment;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
+import com.mm.dell.cardmaker2.fragments.ShapeFragment;
 import com.mm.dell.cardmaker2.fragments.SymbolsFragment;
 import com.mm.dell.cardmaker2.fragments.TextFragmentFragment;
 
@@ -101,7 +103,18 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         initView();
         getWidthHeight();
         initparam();
+        getPermission();
         listView.setOnItemClickListener(onItemClickListener);
+    }
+
+    private void getPermission() {
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
     }
 
     LinearLayout ll_util1;
@@ -129,6 +142,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         componetlist.add(new Nev1_Item(getResources().getString(R.string.bg_layer1), R.drawable.ic_bg_layer));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.text), R.drawable.ic_text));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.material), R.drawable.ic_material));
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
         ComponetAdapater adapater = new ComponetAdapater(CardMainActivity.this, componetlist);
         listView.setAdapter(adapater);
@@ -167,6 +181,17 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 try {
                     FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
                     ft3.replace(containerId, new SymbolsFragment()).commit();
+
+                } catch (Exception e) {
+                    Log.e("Exception", " while adding symbols e - " + e.getMessage());
+                    e.printStackTrace();
+                }
+                break;
+
+            case 4:
+                try {
+                    FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
+                    ft4.replace(containerId, new ShapeFragment()).commit();
 
                 } catch (Exception e) {
                     Log.e("Exception", " while adding symbols e - " + e.getMessage());

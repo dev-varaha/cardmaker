@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.mm.dell.cardmaker2.Adapters.BackGroundAdapter;
 import com.mm.dell.cardmaker2.R;
@@ -17,12 +17,12 @@ import com.mm.dell.cardmaker2.RecyclerOnItemClickListner;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class BackGroundFragment extends Fragment {
-    TextView tv_choosefromgallery;
+public class BackGroundFragment extends Fragment implements View.OnClickListener {
+
     RecyclerView recyclerView;
     private AssetManager assetManager;
     RecyclerOnItemClickListner recyclerOnItemClickListner;
-
+    ImageView iv_fromgallery;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,20 +37,15 @@ public class BackGroundFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_back_ground, container, false);
-        tv_choosefromgallery = view.findViewById(R.id.tv_choosefromgallery);
         recyclerView = view.findViewById(R.id.listtempletes);
+        iv_fromgallery = view.findViewById(R.id.iv_fromgallery);
+        iv_fromgallery.setOnClickListener(this);
         assetManager = getActivity().getAssets();
         try {
             addListToLayerOne();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        tv_choosefromgallery.setOnClickListener(v -> {
-            /**choose from gallery*/
-
-        });
-
         return view;
     }
 
@@ -66,5 +61,12 @@ public class BackGroundFragment extends Fragment {
             backgroundLists.add("backpics/" + file);
         }
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.iv_fromgallery) {
+
+        }
     }
 }
