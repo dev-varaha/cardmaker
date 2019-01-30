@@ -185,9 +185,10 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void setShapeImageView(int color, int side, int borderwidth, int shapeType) {
+    public void setShapeImageView(int side, int shapeType) {
 
     }
+
 
     @Override
     public void ImageResize(int size) {
@@ -196,6 +197,11 @@ public class LayerTwoActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void DeleteView() {
+
+    }
+
+    @Override
+    public void ImageBitmap(Bitmap bitmap) {
 
     }
 

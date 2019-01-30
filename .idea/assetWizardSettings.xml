@@ -55,10 +55,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/height_width.png" />
-                                      <entry key="outputName" value="ic_add" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/iconfinder_yelp_1220361.png" />
+                                      <entry key="outputName" value="ic_shape" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="000000" />
+                                      <entry key="themeColor" value="bd263a" />
                                     </map>
                                   </option>
                                 </PersistentState>

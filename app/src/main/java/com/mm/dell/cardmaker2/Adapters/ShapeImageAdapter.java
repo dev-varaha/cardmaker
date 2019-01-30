@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 
 import com.mm.dell.cardmaker2.R;
+import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
 
 import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
@@ -16,11 +17,12 @@ import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
 public class ShapeImageAdapter extends RecyclerView.Adapter<ShapeImageAdapter.ImageHolder> {
     Context context;
     private int shapeType = NOTDEFINE_SIDE;
-    private int side = 0 ;
+    private int side = 0;
+    SeekBarChange seekBarChange;
 
-
-    public ShapeImageAdapter(Context context) {
+    public ShapeImageAdapter(Context context, SeekBarChange seekBarChange) {
         this.context = context;
+        this.seekBarChange = seekBarChange;
     }
 
 
@@ -70,6 +72,8 @@ public class ShapeImageAdapter extends RecyclerView.Adapter<ShapeImageAdapter.Im
                         side = 7;
                         break;
                 }
+                seekBarChange.setShapeImageView(side, shapeType);
+
             });
             switch (i) {
                 case 0:
@@ -103,7 +107,6 @@ public class ShapeImageAdapter extends RecyclerView.Adapter<ShapeImageAdapter.Im
                     imageHolder.shapeView.changeShapeType(EffectiveShapeView.Shape.POLYGON, 7);
                     break;
             }
-
 
 
         } catch (Exception e) {

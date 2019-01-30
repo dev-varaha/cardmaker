@@ -3,6 +3,8 @@ package com.mm.dell.cardmaker2.activities;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.nfc.Tag;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -33,8 +35,11 @@ import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 import com.mm.dell.cardmaker2.fragments.ShapeFragment;
 import com.mm.dell.cardmaker2.fragments.SymbolsFragment;
 import com.mm.dell.cardmaker2.fragments.TextFragmentFragment;
+import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
 
 import java.util.ArrayList;
+
+import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
 
 public class CardMainActivity extends AppCompatActivity implements SeekBarChange, View.OnTouchListener, OntextChange, RecyclerOnItemClickListner {
     RecyclerView recyclerlist;
@@ -54,7 +59,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     ViewGroup.LayoutParams params;
     ViewGroup.LayoutParams params_symbols;
     ViewGroup.LayoutParams params_material;
-
+    ViewGroup.LayoutParams params_shapimage;
 
     /**
      * textview
@@ -92,8 +97,20 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     ImageView iv_m3;
     ImageView iv_m4;
     ImageView iv_m5;
+
+
+    /**
+     * shape view
+     */
+    EffectiveShapeView iv_pic1;
+    EffectiveShapeView iv_pic2;
+    EffectiveShapeView iv_pic3;
+    EffectiveShapeView iv_pic4;
+    EffectiveShapeView iv_pic5;
+
     public int width;
     public int height;
+    private final String TAG = CardMainActivity.class.getSimpleName();
 
 
     @Override
@@ -262,8 +279,19 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     }
 
     @Override
-    public void setShapeImageView(int color, int side, int borderwidth, int shapeType) {
-
+    public void setShapeImageView(int side, int shapeType) {
+        if (selecteview != null) {
+            selecteview.post(() -> {
+                if (selecteview instanceof EffectiveShapeView) {
+                    EffectiveShapeView shapeView = (EffectiveShapeView) selecteview;
+                    if (side == NOTDEFINE_SIDE) {
+                        shapeView.changeShapeType(shapeType);
+                    } else {
+                        shapeView.changeShapeType(shapeType, side);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -271,13 +299,29 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         try {
             if (selecteview != null) {
                 selecteview.post(() -> {
-                    if (selecteview instanceof ImageView) {
+                    if (selecteview instanceof EffectiveShapeView) {
+                        Log.e(TAG, "selecteview instanceof EffectiveShapeView");
+                        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) selecteview.getLayoutParams();
+                        params.height = size;
+                        params.width = size;
+                        EffectiveShapeView shapeview = (EffectiveShapeView) selecteview;
+                        Bitmap bitmap = ((BitmapDrawable) shapeview.getDrawable()).getBitmap();
+                        shapeview.setScaleType(ImageView.ScaleType.FIT_XY);
+                        shapeview.setImageBitmap(bitmap);
+                        shapeview.setLayoutParams(params);
+                        shapeview.invalidate();
+
+                    } else if (selecteview instanceof ImageView) {
+                        Log.e(TAG, "selecteview instanceof ImageView");
+
                         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) selecteview.getLayoutParams();
                         params.height = size;
                         params.width = size;
                         ImageView imageView = (ImageView) selecteview;
                         imageView.setLayoutParams(params);
                     }
+
+
                 });
             }
         } catch (Exception e) {
@@ -291,6 +335,14 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 selecteview.setVisibility(View.GONE);
             } catch (Exception e) {
             }
+        }
+    }
+
+    @Override
+    public void ImageBitmap(Bitmap bitmap) {
+        if (selecteview instanceof EffectiveShapeView) {
+            EffectiveShapeView shapeView = (EffectiveShapeView) selecteview;
+            shapeView.setImageBitmap(bitmap);
         }
     }
 
@@ -432,6 +484,45 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
         }
 
+    }
+
+
+    private void AddImages() {
+        iv_pic1 = new EffectiveShapeView(this);
+        iv_pic2 = new EffectiveShapeView(this);
+        iv_pic3 = new EffectiveShapeView(this);
+        iv_pic4 = new EffectiveShapeView(this);
+        iv_pic5 = new EffectiveShapeView(this);
+        iv_pic1.setLayoutParams(params_shapimage);
+        iv_pic2.setLayoutParams(params_shapimage);
+        iv_pic3.setLayoutParams(params_shapimage);
+        iv_pic4.setLayoutParams(params_shapimage);
+        iv_pic5.setLayoutParams(params_shapimage);
+        iv_pic1.setOnTouchListener(this);
+        iv_pic2.setOnTouchListener(this);
+        iv_pic3.setOnTouchListener(this);
+        iv_pic4.setOnTouchListener(this);
+        iv_pic5.setOnTouchListener(this);
+        iv_pic1.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic2.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic3.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic4.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic5.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv_pic1.setImageResource(R.drawable.background);
+        iv_pic2.setImageResource(R.drawable.background);
+        iv_pic3.setImageResource(R.drawable.background);
+        iv_pic4.setImageResource(R.drawable.background);
+        iv_pic5.setImageResource(R.drawable.background);
+        iv_pic1.setVisibility(View.GONE);
+        iv_pic2.setVisibility(View.GONE);
+        iv_pic3.setVisibility(View.GONE);
+        iv_pic4.setVisibility(View.GONE);
+        iv_pic5.setVisibility(View.GONE);
+        root.addView(iv_pic1);
+        root.addView(iv_pic2);
+        root.addView(iv_pic3);
+        root.addView(iv_pic4);
+        root.addView(iv_pic5);
     }
 
 
@@ -614,9 +705,12 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         params_symbols = new ViewGroup.LayoutParams(60, 60);
         params_material = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params_shapimage = new ViewGroup.LayoutParams(90, 90);
+
         AddTextViews();
         AddSymbolsViews();
         AddMaterialsView();
+        AddImages();
     }
 
     public void saveBitmap() {
@@ -658,4 +752,47 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     public void getLayerOneImage(Bitmap bitmap) {
         layerone.setImageBitmap(bitmap);
     }
+
+    public View addImagetoImageview() throws Exception {
+        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
+        if (iv_pic1.getVisibility() == View.GONE) {
+            iv_pic1.setVisibility(View.VISIBLE);
+            iv_pic1.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+
+            selecteview = iv_pic1;
+            selecteview.bringToFront();
+            return iv_pic1;
+        } else if (iv_pic2.getVisibility() == View.GONE) {
+            iv_pic2.setVisibility(View.VISIBLE);
+            iv_pic2.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+
+            selecteview = iv_pic2;
+            selecteview.bringToFront();
+            return iv_pic2;
+        } else if (iv_pic3.getVisibility() == View.GONE) {
+            iv_pic3.setVisibility(View.VISIBLE);
+            iv_pic3.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+
+            selecteview = iv_pic3;
+            selecteview.bringToFront();
+            return iv_pic3;
+        } else if (iv_pic4.getVisibility() == View.GONE) {
+            iv_pic4.setVisibility(View.VISIBLE);
+            iv_pic4.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+
+            selecteview = iv_pic4;
+            selecteview.bringToFront();
+            return iv_pic4;
+        } else if (iv_pic5.getVisibility() == View.GONE) {
+            iv_pic5.setVisibility(View.VISIBLE);
+            iv_pic5.changeShapeType(EffectiveShapeView.Shape.CIRCLE);
+
+            selecteview = iv_pic5;
+            selecteview.bringToFront();
+            return iv_pic5;
+        } else {
+            return null;
+        }
+    }
+
 }

@@ -6,17 +6,120 @@
     android:orientation="vertical"
     tools:context=".fragments.ShapeFragment">
 
+    <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size10dp"
+        android:layout_margin="@dimen/size3dp"
+        android:progressDrawable="@drawable/seekbar_styl"
+        android:thumb="@drawable/custom_thumb"
+        android:visibility="gone" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorclan">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview_shape"
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:id="@+id/scrollutil"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:padding="@dimen/size1dp" />
+            android:background="@color/colorclan">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_addview"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_add" />
+
+
+                <ImageView
+                    android:id="@+id/iv_size"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_height_width" />
+
+
+                <ImageView
+                    android:id="@+id/iv_rotate"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_rotate" />
+
+
+                <ImageView
+                    android:id="@+id/iv_opacity"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_brightness" />
+
+                <ImageView
+                    android:id="@+id/iv_showshape"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_shape" />
+
+
+                <ImageView
+                    android:id="@+id/iv_deleteview"
+                    android:layout_width="@dimen/size30dp"
+                    android:layout_height="@dimen/size30dp"
+                    android:layout_margin="@dimen/size1dp"
+                    android:background="@drawable/rounded_background"
+                    android:padding="@dimen/size5dp"
+                    android:src="@drawable/ic_deleteview" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <RelativeLayout
+            android:id="@+id/relative_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/size30dp"
+                android:layout_height="@dimen/size30dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/size1dp"
+                android:src="@drawable/ic_backu" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/size40dp"
+                android:padding="@dimen/size1dp" />
+
+        </RelativeLayout>
+
+
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView

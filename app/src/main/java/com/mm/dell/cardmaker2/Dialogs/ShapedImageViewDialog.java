@@ -78,10 +78,10 @@ public class ShapedImageViewDialog extends Dialog implements View.OnClickListene
                 Log.e("TV_OK","<<<<<<>>>>>>>  DEFAULT_BORDER_SIZE  "+DEFAULT_BORDER_SIZE);
                 Log.e("TV_OK","<<<<<<>>>>>>>  shapeType  "+shapeType);
                 if (checkBox.isChecked()) {
-                             seekBarChange.setShapeImageView(bordercolor,side,DEFAULT_BORDER_SIZE,shapeType);
+                //             seekBarChange.setShapeImageView(bordercolor,side,DEFAULT_BORDER_SIZE,shapeType);
                 } else {
-                    seekBarChange.setShapeImageView(bordercolor,side,NOTDEFINE_BORDER_SIZE,shapeType);
-                }
+             //       seekBarChange.setShapeImageView(bordercolor,side,NOTDEFINE_BORDER_SIZE,shapeType);
+               }
                 this.dismiss();
                 break;
             case R.id.ll_colorpicker:

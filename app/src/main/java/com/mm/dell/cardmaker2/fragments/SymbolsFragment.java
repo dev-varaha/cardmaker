@@ -32,6 +32,7 @@ public class SymbolsFragment extends Fragment implements View.OnClickListener, C
     ImageView iv_colorpicker;
     ImageView iv_rotate;
 
+
     private String TAG = MaterialsFragment.class.getSimpleName();
     private SeekBarChange seekBarChange;
 

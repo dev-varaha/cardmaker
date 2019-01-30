@@ -4,7 +4,7 @@ package com.mm.dell.cardmaker2.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,16 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.mm.dell.cardmaker2.R;
+import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 
 import java.util.ArrayList;
 
 public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapter.IHolder> {
     Context context;
     ArrayList<String> fileList = new ArrayList<>();
+    SeekBarChange seekBarChange;
 
-    public GalleryImageAdapter(Context context, ArrayList<String> fileList) {
+    public GalleryImageAdapter(Context context, ArrayList<String> fileList, SeekBarChange seekBarChange) {
         this.context = context;
         this.fileList = fileList;
+        this.seekBarChange = seekBarChange;
     }
 
     @NonNull
@@ -37,7 +40,7 @@ public class GalleryImageAdapter extends RecyclerView.Adapter<GalleryImageAdapte
         Bitmap bitmap = BitmapFactory.decodeFile(fileList.get(i));
         iHolder.imageView.setImageBitmap(bitmap);
         iHolder.imageView.setOnClickListener(v -> {
-            //  seekBarChange.getBitmapImage(bitmap);
+            seekBarChange.ImageBitmap(bitmap);
         });
 
 
