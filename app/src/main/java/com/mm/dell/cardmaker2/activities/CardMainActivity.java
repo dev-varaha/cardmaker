@@ -169,14 +169,14 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> {
         switch (position) {
             case 0:
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                 ft.replace(containerId, new BackGroundFragment()).commit();
 
                 break;
             case 1:
 
                 try {
-                    FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft1.replace(containerId, new TextFragmentFragment()).commit();
 
                 } catch (Exception e) {
@@ -186,7 +186,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 break;
             case 2:
                 try {
-                    FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft2.replace(containerId, new MaterialsFragment()).commit();
 
                 } catch (Exception e) {
@@ -196,7 +196,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 break;
             case 3:
                 try {
-                    FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft3.replace(containerId, new SymbolsFragment()).commit();
 
                 } catch (Exception e) {
@@ -207,7 +207,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
             case 4:
                 try {
-                    FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
+                    FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft4.replace(containerId, new ShapeFragment()).commit();
 
                 } catch (Exception e) {

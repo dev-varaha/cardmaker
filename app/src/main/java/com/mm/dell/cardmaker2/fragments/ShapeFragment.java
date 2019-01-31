@@ -152,6 +152,9 @@ public class ShapeFragment extends Fragment implements View.OnClickListener {
                         rv_shape.setVisibility(View.VISIBLE);
                         scrollutil.setVisibility(View.GONE);
                     }
+                    if (seek.getVisibility() == View.VISIBLE) {
+                        seek.setVisibility(View.GONE);
+                    }
                 } catch (Exception e) {
                 }
                 break;
