@@ -156,11 +156,13 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
     private void setComponentAdapter() {
         ArrayList<Nev1_Item> componetlist = new ArrayList<>();
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.download), R.drawable.ic_download));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.bg_layer1), R.drawable.ic_bg_layer));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.text), R.drawable.ic_text));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.material), R.drawable.ic_material));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
-        componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_shape));
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.exit), R.drawable.ic_exit));
         ComponetAdapater adapater = new ComponetAdapater(CardMainActivity.this, componetlist);
         listView.setAdapter(adapater);
     }
@@ -169,11 +171,21 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     AdapterView.OnItemClickListener onItemClickListener = (parent, view, position, id) -> {
         switch (position) {
             case 0:
+                saveBitmap();
+                break;
+
+            case 6:
+
+
+                break;
+
+
+            case 1:
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                 ft.replace(containerId, new BackGroundFragment()).commit();
 
                 break;
-            case 1:
+            case 2:
 
                 try {
                     FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
@@ -184,7 +196,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                     e.printStackTrace();
                 }
                 break;
-            case 2:
+            case 3:
                 try {
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft2.replace(containerId, new MaterialsFragment()).commit();
@@ -194,7 +206,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                     e.printStackTrace();
                 }
                 break;
-            case 3:
+            case 4:
                 try {
                     FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft3.replace(containerId, new SymbolsFragment()).commit();
@@ -205,7 +217,7 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 }
                 break;
 
-            case 4:
+            case 5:
                 try {
                     FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                     ft4.replace(containerId, new ShapeFragment()).commit();

@@ -3,11 +3,9 @@
     <color name="colorPrimary">#04d9c2</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="cyan">#a4acac</color>
     <color name="colorblacktrans">#9b000000</color>
     <color name="colorwhite">#ffffff</color>
     <color name="colorblack">#000000</color>
-    <color name="colorfulltrans">#007702fc</color>
     <color name="colorred">#ff0101</color>
     <color name="colorwhitetrans">#7cffffff</color>
     <color name="colorclan">#88e7e3</color>

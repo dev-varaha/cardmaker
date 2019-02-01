@@ -22,20 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity
-            android:name=".Main2Activity"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".LayerTwoActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
     </application>
 
 </manifest>

@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/snap/android-studio/70/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/snap/android-studio/70/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_exit_to_app_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -56,10 +56,10 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/iconfinder_yelp_1220361.png" />
-                                      <entry key="outputName" value="ic_shape" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../flag.png" />
+                                      <entry key="outputName" value="ic_symbols" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="bd263a" />
+                                      <entry key="themeColor" value="bd2e4c" />
                                     </map>
                                   </option>
                                 </PersistentState>

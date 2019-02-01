@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.Dialogs.EditTextViewDialog;
 import com.mm.dell.cardmaker2.FontModel;
-import com.mm.dell.cardmaker2.Main2Activity;
 import com.mm.dell.cardmaker2.R;
 import com.mm.dell.cardmaker2.RecyclerOnItemClickListner;
 import com.mm.dell.cardmaker2.RecylerBotttomAdapter;
