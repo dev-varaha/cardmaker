@@ -1,12 +1,17 @@
 package com.mm.dell.cardmaker2.activities;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,12 +29,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mm.dell.cardmaker2.Adapters.ComponetAdapater;
+import com.mm.dell.cardmaker2.Dialogs.ExitDialog;
 import com.mm.dell.cardmaker2.Nev1_Item;
 import com.mm.dell.cardmaker2.R;
 import com.mm.dell.cardmaker2.RecyclerOnItemClickListner;
 import com.mm.dell.cardmaker2.Utils.OntextChange;
 import com.mm.dell.cardmaker2.fragments.BackGroundFragment;
 import com.mm.dell.cardmaker2.Dialogs.EditTextViewDialog;
+import com.mm.dell.cardmaker2.fragments.EmojiFragment;
 import com.mm.dell.cardmaker2.fragments.MaterialsFragment;
 import com.mm.dell.cardmaker2.fragments.SeekBarChange;
 import com.mm.dell.cardmaker2.fragments.ShapeFragment;
@@ -39,6 +46,7 @@ import com.mm.dell.cardmaker2.layout.EffectiveShapeView;
 
 import java.util.ArrayList;
 
+import static com.mm.dell.cardmaker2.Constants.IMAGE_REQUEST_CODE;
 import static com.mm.dell.cardmaker2.Constants.NOTDEFINE_SIDE;
 
 public class CardMainActivity extends AppCompatActivity implements SeekBarChange, View.OnTouchListener, OntextChange, RecyclerOnItemClickListner {
@@ -89,6 +97,22 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     ImageView iv_s9;
     ImageView iv_s10;
 
+
+    /**
+     * Symbols imageview
+     */
+    ImageView iv_e1;
+    ImageView iv_e2;
+    ImageView iv_e3;
+    ImageView iv_e4;
+    ImageView iv_e5;
+    ImageView iv_e6;
+    ImageView iv_e7;
+    ImageView iv_e8;
+    ImageView iv_e9;
+    ImageView iv_e10;
+
+
     /**
      * materials imageview
      */
@@ -113,25 +137,33 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
     private final String TAG = CardMainActivity.class.getSimpleName();
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_main);
         initView();
+        getPermission();
         getWidthHeight();
         initparam();
-        getPermission();
         listView.setOnItemClickListener(onItemClickListener);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void getPermission() {
-
+        if (this.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || this.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == IMAGE_REQUEST_CODE) {
 
+        }
     }
 
     LinearLayout ll_util1;
@@ -161,7 +193,8 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
         componetlist.add(new Nev1_Item(getResources().getString(R.string.text), R.drawable.ic_text));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.material), R.drawable.ic_material));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_symbols));
-        componetlist.add(new Nev1_Item(getResources().getString(R.string.symbol), R.drawable.ic_shape));
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.shape), R.drawable.ic_shape));
+        componetlist.add(new Nev1_Item(getResources().getString(R.string.emoji), R.drawable.emoji));
         componetlist.add(new Nev1_Item(getResources().getString(R.string.exit), R.drawable.ic_exit));
         ComponetAdapater adapater = new ComponetAdapater(CardMainActivity.this, componetlist);
         listView.setAdapter(adapater);
@@ -175,14 +208,20 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
                 break;
 
             case 6:
+                FragmentTransaction ft6 = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
+                ft6.replace(containerId, new EmojiFragment()).commit();
 
-
+                break;
+            case 7:
+                ExitDialog dialog = new ExitDialog(this, this);
+                dialog.show();
                 break;
 
 
             case 1:
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.slide_in_left, 0, 0, R.anim.slide_out_left);
                 ft.replace(containerId, new BackGroundFragment()).commit();
+
 
                 break;
             case 2:
@@ -445,6 +484,60 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
     }
 
+    private void AddEmojiViews() {
+        iv_e1 = new ImageView(CardMainActivity.this);
+        iv_e2 = new ImageView(CardMainActivity.this);
+        iv_e3 = new ImageView(CardMainActivity.this);
+        iv_e4 = new ImageView(CardMainActivity.this);
+        iv_e5 = new ImageView(CardMainActivity.this);
+        iv_e6 = new ImageView(CardMainActivity.this);
+        iv_e7 = new ImageView(CardMainActivity.this);
+        iv_e8 = new ImageView(CardMainActivity.this);
+        iv_e9 = new ImageView(CardMainActivity.this);
+        iv_e10 = new ImageView(CardMainActivity.this);
+        iv_e1.setLayoutParams(params_symbols);
+        iv_e2.setLayoutParams(params_symbols);
+        iv_e3.setLayoutParams(params_symbols);
+        iv_e4.setLayoutParams(params_symbols);
+        iv_e5.setLayoutParams(params_symbols);
+        iv_e6.setLayoutParams(params_symbols);
+        iv_e7.setLayoutParams(params_symbols);
+        iv_e8.setLayoutParams(params_symbols);
+        iv_e9.setLayoutParams(params_symbols);
+        iv_e10.setLayoutParams(params_symbols);
+        iv_e1.setOnTouchListener(this);
+        iv_e2.setOnTouchListener(this);
+        iv_e3.setOnTouchListener(this);
+        iv_e4.setOnTouchListener(this);
+        iv_e5.setOnTouchListener(this);
+        iv_e6.setOnTouchListener(this);
+        iv_e7.setOnTouchListener(this);
+        iv_e8.setOnTouchListener(this);
+        iv_e9.setOnTouchListener(this);
+        iv_e10.setOnTouchListener(this);
+        iv_e1.setVisibility(View.GONE);
+        iv_e2.setVisibility(View.GONE);
+        iv_e3.setVisibility(View.GONE);
+        iv_e4.setVisibility(View.GONE);
+        iv_e5.setVisibility(View.GONE);
+        iv_e6.setVisibility(View.GONE);
+        iv_e7.setVisibility(View.GONE);
+        iv_e8.setVisibility(View.GONE);
+        iv_e9.setVisibility(View.GONE);
+        iv_e10.setVisibility(View.GONE);
+        root.addView(iv_e1);
+        root.addView(iv_e2);
+        root.addView(iv_e3);
+        root.addView(iv_e4);
+        root.addView(iv_e5);
+        root.addView(iv_e6);
+        root.addView(iv_e7);
+        root.addView(iv_e8);
+        root.addView(iv_e9);
+        root.addView(iv_e10);
+
+    }
+
 
     public void AddTextViewsText() {
 
@@ -677,6 +770,65 @@ public class CardMainActivity extends AppCompatActivity implements SeekBarChange
 
 
     }
+
+
+    public void addEmojiImageview() throws Exception {
+        Log.e("addImagetoImageview", "addImagetoImageview   ivs_1 " + iv_s1.getDrawable());
+        if (iv_e1.getVisibility() == View.GONE) {
+            iv_e1.setVisibility(View.VISIBLE);
+            iv_e1.setImageResource(R.drawable.ic_symbols);
+            selecteview = iv_e1;
+            selecteview.bringToFront();
+        } else if (iv_e2.getVisibility() == View.GONE) {
+            iv_e2.setVisibility(View.VISIBLE);
+            iv_e2.setImageResource(R.drawable.ic_symbols);
+            selecteview = iv_e2;
+            selecteview.bringToFront();
+        } else if (iv_e3.getVisibility() == View.GONE) {
+            iv_e3.setVisibility(View.VISIBLE);
+            iv_e3.setImageResource(R.drawable.ic_symbols);
+            selecteview = iv_e3;
+            selecteview.bringToFront();
+        } else if (iv_e4.getVisibility() == View.GONE) {
+            iv_e4.setVisibility(View.VISIBLE);
+            iv_e4.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e4;
+        } else if (iv_s5.getVisibility() == View.GONE) {
+            iv_s5.setVisibility(View.VISIBLE);
+            iv_s5.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e5;
+        } else if (iv_e6.getVisibility() == View.GONE) {
+            iv_e6.setVisibility(View.VISIBLE);
+            iv_e6.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e6;
+        } else if (iv_e7.getVisibility() == View.GONE) {
+            iv_e7.setVisibility(View.VISIBLE);
+            iv_e7.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e7;
+        } else if (iv_e8.getVisibility() == View.GONE) {
+            iv_e8.setVisibility(View.VISIBLE);
+            iv_e8.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e8;
+        } else if (iv_e9.getVisibility() == View.GONE) {
+            iv_e9.setVisibility(View.VISIBLE);
+            iv_e9.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e9;
+        } else if (iv_e10.getVisibility() == View.GONE) {
+            iv_e10.setVisibility(View.VISIBLE);
+            iv_e10.setImageResource(R.drawable.ic_symbols);
+            selecteview.bringToFront();
+            selecteview = iv_e10;
+        }
+
+
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

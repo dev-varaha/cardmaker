@@ -1,9 +1,14 @@
 package com.mm.dell.cardmaker2.fragments;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +29,8 @@ import com.mm.dell.cardmaker2.activities.CardMainActivity;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import static com.mm.dell.cardmaker2.Constants.IMAGE_REQUEST_CODE;
 
 public class ShapeFragment extends Fragment implements View.OnClickListener {
     final String TAG = ShapeFragment.class.getSimpleName();
@@ -57,6 +64,7 @@ public class ShapeFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initView(View view) {
 
         seek = view.findViewById(R.id.seek);
@@ -93,11 +101,19 @@ public class ShapeFragment extends Fragment implements View.OnClickListener {
         adapter = new GalleryImageAdapter(getActivity(), fileList, (SeekBarChange) getActivity());
         recyclerview_shape_image.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerview_shape_image.setAdapter(adapter);
-        fileList.addAll(getFile(root));
-        adapter.notifyDataSetChanged();
-
-
+        if (getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED || getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
+        } else {
+            fileList.addAll(getFile(root));
+            adapter.notifyDataSetChanged();
+        }
     }
+
+
+
+
 
     public ArrayList<String> getFile(File dir) {
         File listFile[] = dir.listFiles();

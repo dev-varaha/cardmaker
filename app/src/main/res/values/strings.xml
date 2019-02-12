@@ -12,5 +12,8 @@
     <string name="cancel">Cancel</string>
     <string name="exit">exit</string>
     <string name="download">Download</string>
+    <string name="are_uhh_sure_exit">Are you sure to exit?</string>
+    <string name="shape">Shape</string>
+    <string name="emoji">Emoji</string>
 
 </resources>

@@ -27,6 +27,6 @@
         android:layout_gravity="center_vertical"
         android:singleLine="true"
         android:text="@string/text"
-        android:textColor="@color/colorgreen" />
+        android:textColor="@color/colorredish" />
 
 </LinearLayout>

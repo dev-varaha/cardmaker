@@ -11,5 +11,5 @@ public interface Constants {
     int DEFAULT_BORDER_SIZE = 10;
     int NOTDEFINE_BORDER_SIZE = 121;
     int UNDEFINE_SHAPE_TYPE = 10002;
-
+    int IMAGE_REQUEST_CODE = 1245;
 }
