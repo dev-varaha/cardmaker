@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/create_s"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/size5dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/create_s"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/size5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:onClick="Post_V"
+            android:id="@+id/tv_post_v"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/react_create"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/size5dp"
+            android:text="@string/create_vertical_post"
+            android:textColor="@color/colorredish"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size10dp" />
+
+        <TextView
+            android:id="@+id/tv_post_h"
+            android:onClick="Post_H"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size5dp"
+            android:background="@drawable/react_create"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/size5dp"
+            android:text="@string/create_horizontal_post"
+            android:textColor="@color/colorredish"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

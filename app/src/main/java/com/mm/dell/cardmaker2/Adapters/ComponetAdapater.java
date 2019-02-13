@@ -41,7 +41,7 @@ public class ComponetAdapater extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.nav1_raw, parent, false);
+        convertView = inflater.inflate(R.layout.componentraw, parent, false);
         TextView tv_itemname = convertView.findViewById(R.id.tv_itemname);
         ImageView iv_item = convertView.findViewById(R.id.iv_item);
         tv_itemname.setText(list.get(position).getItem_name());

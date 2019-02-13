@@ -21,7 +21,7 @@ import com.mm.dell.cardmaker2.RecyclerOnItemClickListner;
 import com.mm.dell.cardmaker2.RecylerBotttomAdapter;
 import com.mm.dell.cardmaker2.Root.Root;
 import com.mm.dell.cardmaker2.Utils.OntextChange;
-import com.mm.dell.cardmaker2.activities.CardMainActivity;
+import com.mm.dell.cardmaker2.activities.H_MainActivity;
 
 import java.util.ArrayList;
 
@@ -138,7 +138,7 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
                 try {
                     seek.setOnSeekBarChangeListener(null);
                     Log.e(TAG, "iv_textsized is being called");
-                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    H_MainActivity activity1 = (H_MainActivity) getActivity();
                     seek.setMax(activity1.width);
                     seek.setProgress(14);
                     handle_seekbar = 12;
@@ -180,7 +180,7 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
             case R.id.iv_addtext:
                 try {
                     Log.e(TAG, "add text is being called");
-                    CardMainActivity activity2 = (CardMainActivity) getActivity();
+                    H_MainActivity activity2 = (H_MainActivity) getActivity();
                     assert activity2 != null;
                     activity2.AddTextViewsText();
                     if (seek.getVisibility() == View.VISIBLE) {
@@ -193,7 +193,7 @@ public class TextFragmentFragment extends Fragment implements View.OnClickListen
 
             case R.id.iv_edittext:
                 try {
-                    CardMainActivity activity = (CardMainActivity) getActivity();
+                    H_MainActivity activity = (H_MainActivity) getActivity();
                     View view = activity.selecteview;
                     OntextChange ontextChange = (OntextChange) getActivity();
                     if (view instanceof TextView) {

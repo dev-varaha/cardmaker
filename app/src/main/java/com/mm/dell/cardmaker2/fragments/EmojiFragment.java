@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 import com.mm.dell.cardmaker2.Adapters.MaterialSymbolAdapter;
 import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.R;
-import com.mm.dell.cardmaker2.activities.CardMainActivity;
+import com.mm.dell.cardmaker2.activities.H_MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,7 +113,7 @@ public class EmojiFragment extends Fragment implements View.OnClickListener, Col
                 try {
                     seek.setOnSeekBarChangeListener(null);
                     Handle_SeekBar = 12;
-                    CardMainActivity activity = (CardMainActivity) getActivity();
+                    H_MainActivity activity = (H_MainActivity) getActivity();
                     seek.setMax(activity.width);
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
                     if (seek.getVisibility() == View.GONE) {
@@ -147,7 +147,7 @@ public class EmojiFragment extends Fragment implements View.OnClickListener, Col
                 break;
             case R.id.iv_addview:
                 try {
-                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    H_MainActivity activity1 = (H_MainActivity) getActivity();
                     assert activity1 != null;
                     activity1.addEmojiImageview();
                     if (seek.getVisibility() == View.VISIBLE) {

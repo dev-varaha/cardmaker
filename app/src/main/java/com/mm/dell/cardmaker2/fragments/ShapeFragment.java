@@ -1,9 +1,7 @@
 package com.mm.dell.cardmaker2.fragments;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,9 +21,8 @@ import android.widget.SeekBar;
 
 import com.mm.dell.cardmaker2.Adapters.GalleryImageAdapter;
 import com.mm.dell.cardmaker2.Adapters.ShapeImageAdapter;
-import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.R;
-import com.mm.dell.cardmaker2.activities.CardMainActivity;
+import com.mm.dell.cardmaker2.activities.H_MainActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -192,7 +189,7 @@ public class ShapeFragment extends Fragment implements View.OnClickListener {
                 try {
                     seek.setOnSeekBarChangeListener(null);
                     Handle_SeekBar = 12;
-                    CardMainActivity activity = (CardMainActivity) getActivity();
+                    H_MainActivity activity = (H_MainActivity) getActivity();
                     seek.setMax(activity.width);
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
                     if (seek.getVisibility() == View.GONE) {
@@ -226,7 +223,7 @@ public class ShapeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.iv_addview:
                 try {
-                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    H_MainActivity activity1 = (H_MainActivity) getActivity();
                     assert activity1 != null;
                     activity1.addImagetoImageview();
                     if (seek.getVisibility() == View.VISIBLE) {

@@ -15,5 +15,9 @@
     <string name="are_uhh_sure_exit">Are you sure to exit?</string>
     <string name="shape">Shape</string>
     <string name="emoji">Emoji</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="create_vertical_post">Create Vertical Post</string>
+    <string name="create_horizontal_post">Create Horizontal Post</string>
 
 </resources>

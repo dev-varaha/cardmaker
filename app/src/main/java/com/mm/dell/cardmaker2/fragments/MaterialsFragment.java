@@ -1,9 +1,6 @@
 package com.mm.dell.cardmaker2.fragments;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.AssetManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,11 +15,10 @@ import android.widget.SeekBar;
 import com.mm.dell.cardmaker2.Adapters.MaterialSymbolAdapter;
 import com.mm.dell.cardmaker2.Dialogs.ColorPicker2dialog;
 import com.mm.dell.cardmaker2.R;
-import com.mm.dell.cardmaker2.activities.CardMainActivity;
+import com.mm.dell.cardmaker2.activities.H_MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 public class MaterialsFragment extends Fragment implements View.OnClickListener, ColorPicker2dialog.colorpickercallback {
@@ -121,7 +117,7 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                 try {
                     seek.setOnSeekBarChangeListener(null);
                     Handle_SeekBar = 12;
-                    CardMainActivity activity = (CardMainActivity) getActivity();
+                    H_MainActivity activity = (H_MainActivity) getActivity();
                     seek.setMax(activity.width);
                     seek.setOnSeekBarChangeListener(seekBarChangeListener);
                     if (seek.getVisibility() == View.GONE) {
@@ -168,7 +164,7 @@ public class MaterialsFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.iv_addview:
                 try {
-                    CardMainActivity activity1 = (CardMainActivity) getActivity();
+                    H_MainActivity activity1 = (H_MainActivity) getActivity();
                     activity1.addMaterialtoImageview();
                     if (seek.getVisibility() == View.VISIBLE) {
                         seek.setVisibility(View.GONE);
