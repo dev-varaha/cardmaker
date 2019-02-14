@@ -2,22 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <ImageView
+        android:layout_margin="@dimen/size3dp"
         android:id="@+id/iv_item"
         android:layout_width="@dimen/size30dp"
         android:layout_height="@dimen/size30dp"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="@dimen/size3dp" />
+        android:layout_gravity="center_vertical" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_itemname"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/size3dp"
         android:singleLine="true"
-        android:textColor="@color/colorredish"
-        android:visibility="gone" />
+        android:textColor="@color/colorredish" />
 </LinearLayout>

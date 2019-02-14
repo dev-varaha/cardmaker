@@ -56,8 +56,8 @@ public class ExitDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.tv_ok:
                 try {
-                    appCompatActivity.finish();
                     this.dismiss();
+                    appCompatActivity.finish();
                 } catch (Exception e) {
                 }
                 break;
